@@ -51,7 +51,7 @@ export default function Index({ coupons, filters }) {
                     </div>
                     <Link 
                         href={route('admin.coupons.create')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
                     >
                         <Plus size={18} /> New Coupon
                     </Link>
@@ -67,7 +67,7 @@ export default function Index({ coupons, filters }) {
                                 placeholder="Search by coupon code..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <button type="submit" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg active:scale-95">
@@ -79,12 +79,12 @@ export default function Index({ coupons, filters }) {
                 {/* Grid Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     {coupons.data.map((coupon) => (
-                        <div key={coupon.id} className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-50 transition-all duration-500 group relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 opacity-30 blur-3xl -mr-16 -mt-16 rounded-full group-hover:bg-indigo-100 transition-colors"></div>
+                        <div key={coupon.id} className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-emerald-50 transition-all duration-500 group relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 opacity-30 blur-3xl -mr-16 -mt-16 rounded-full group-hover:bg-emerald-100 transition-colors"></div>
                             
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-8">
-                                    <div className="px-5 py-2.5 bg-indigo-50 text-indigo-600 font-black text-lg tracking-widest rounded-2xl shadow-inner uppercase">
+                                    <div className="px-5 py-2.5 bg-emerald-50 text-emerald-600 font-black text-lg tracking-widest rounded-2xl shadow-inner uppercase">
                                         {coupon.code}
                                     </div>
                                     <div className={cn(
@@ -146,7 +146,7 @@ export default function Index({ coupons, filters }) {
                                 className={cn(
                                     "w-12 h-12 rounded-2xl flex items-center justify-center text-xs font-black transition-all",
                                     link.active 
-                                        ? "bg-blue-600 text-white shadow-xl shadow-blue-100" 
+                                        ? "bg-emerald-600 text-white shadow-xl shadow-emerald-100" 
                                         : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                     !link.url && "opacity-20 cursor-not-allowed"
                                 )}

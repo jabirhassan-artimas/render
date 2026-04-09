@@ -108,4 +108,19 @@ class CustomerController extends Controller
 
         return back()->with('success', 'Order has been cancelled successfully.');
     }
+    public function downloadInvoice(Order $order)
+    {
+        if ($order->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $order->load('items.product', 'user');
+        if (!$order->invoice_no) {
+            $order->update([
+                'invoice_no' => 'INV-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(4))
+            ]);
+        }
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.invoice', ['order' => $order]);
+        return $pdf->download("invoice-{$order->invoice_no}.pdf");
+    }
 }

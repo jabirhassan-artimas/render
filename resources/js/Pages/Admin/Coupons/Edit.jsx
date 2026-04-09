@@ -27,7 +27,7 @@ export default function Edit({ coupon }) {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.coupons.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -48,7 +48,7 @@ export default function Edit({ coupon }) {
                                 type="text"
                                 value={data.code}
                                 onChange={e => setData('code', e.target.value.toUpperCase())}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-lg font-black tracking-[0.1em] focus:ring-2 focus:ring-blue-100 transition-all uppercase"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-lg font-black tracking-[0.1em] focus:ring-2 focus:ring-emerald-100 transition-all uppercase"
                             />
                             {errors.code && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.code}</p>}
                         </div>
@@ -63,7 +63,7 @@ export default function Edit({ coupon }) {
                                     type="number"
                                     value={data.discount_amount}
                                     onChange={e => setData('discount_amount', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-mono"
                                 />
                                 {errors.discount_amount && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.discount_amount}</p>}
                             </div>
@@ -75,7 +75,7 @@ export default function Edit({ coupon }) {
                                     type="number"
                                     value={data.discount_percentage}
                                     onChange={e => setData('discount_percentage', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-mono"
                                 />
                                 {errors.discount_percentage && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.discount_percentage}</p>}
                             </div>
@@ -90,7 +90,7 @@ export default function Edit({ coupon }) {
                                 type="date"
                                 value={data.expires_at}
                                 onChange={e => setData('expires_at', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
 

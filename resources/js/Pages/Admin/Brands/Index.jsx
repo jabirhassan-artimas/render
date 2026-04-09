@@ -49,7 +49,7 @@ export default function Index({ brands, filters }) {
                     </div>
                     <Link 
                         href={route('admin.brands.create')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
                     >
                         <Plus size={18} /> Add Brand
                     </Link>
@@ -65,7 +65,7 @@ export default function Index({ brands, filters }) {
                                 placeholder="Search by brand name..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <button type="submit" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg active:scale-95">
@@ -77,13 +77,13 @@ export default function Index({ brands, filters }) {
                 {/* Grid Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                     {brands.data.map((brand) => (
-                        <div key={brand.id} className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-blue-50 transition-all duration-500 group relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 opacity-50 blur-3xl -mr-8 -mt-8 rounded-full group-hover:bg-blue-100 transition-colors"></div>
+                        <div key={brand.id} className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-emerald-50 transition-all duration-500 group relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 opacity-50 blur-3xl -mr-8 -mt-8 rounded-full group-hover:bg-emerald-100 transition-colors"></div>
                             
                             <div className="flex flex-col items-center text-center relative z-10">
                                 <div className="w-24 h-24 bg-slate-50 rounded-[2rem] overflow-hidden mb-6 border border-slate-100 shadow-inner group-hover:scale-110 transition-transform duration-500">
                                     {brand.image ? (
-                                        <img src={`/storage/${brand.image}`} className="w-full h-full object-cover" />
+                                        <img src={`/uploads/${brand.image}`} className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-slate-200">
                                             <Award size={48} />
@@ -103,7 +103,7 @@ export default function Index({ brands, filters }) {
                                     <div className="flex gap-2">
                                         <Link 
                                             href={route('admin.brands.edit', brand.id)}
-                                            className="p-3 bg-white border border-slate-100 text-slate-300 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                            className="p-3 bg-white border border-slate-100 text-slate-300 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                         >
                                             <Edit size={16} />
                                         </Link>
@@ -131,7 +131,7 @@ export default function Index({ brands, filters }) {
                                 className={cn(
                                     "w-12 h-12 rounded-2xl flex items-center justify-center text-xs font-black transition-all",
                                     link.active 
-                                        ? "bg-blue-600 text-white shadow-xl shadow-blue-100" 
+                                        ? "bg-emerald-600 text-white shadow-xl shadow-emerald-100" 
                                         : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                     !link.url && "opacity-20 cursor-not-allowed"
                                 )}

@@ -25,7 +25,7 @@ export default function Edit({ brand }) {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.brands.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -46,7 +46,7 @@ export default function Edit({ brand }) {
                                 type="text"
                                 value={data.name}
                                 onChange={e => setData('name', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                             />
                             {errors.name && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.name}</p>}
                         </div>
@@ -65,20 +65,20 @@ export default function Edit({ brand }) {
                                 />
                                 <label 
                                     htmlFor="brand-logo-edit"
-                                    className="flex flex-col items-center justify-center w-full aspect-square bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group max-w-[240px] mx-auto"
+                                    className="flex flex-col items-center justify-center w-full aspect-square bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group max-w-[240px] mx-auto"
                                 >
                                     {data.image ? (
                                         <img src={URL.createObjectURL(data.image)} className="w-full h-full object-contain p-4" />
                                     ) : (
                                         <div className="relative w-full h-full p-4 flex items-center justify-center">
                                             {brand.image ? (
-                                                <img src={`/storage/${brand.image}`} className="w-full h-full object-contain opacity-60" />
+                                                <img src={`/uploads/${brand.image}`} className="w-full h-full object-contain opacity-60" />
                                             ) : (
                                                 <div className="text-slate-200 font-black italic uppercase text-lg">{brand.name.charAt(0)}</div>
                                             )}
                                             <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                                                    <ImageIcon className="text-blue-500" size={18} />
+                                                    <ImageIcon className="text-emerald-500" size={18} />
                                                 </div>
                                             </div>
                                         </div>

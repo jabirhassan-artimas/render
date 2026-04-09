@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\NewsletterSubscriber;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -82,5 +83,19 @@ class AdminController extends Controller
             'topProducts' => $topProducts,
             'recentActivity' => $recentActivity
         ]);
+    }
+
+    public function newsletter()
+    {
+        $subscribers = NewsletterSubscriber::latest()->paginate(20);
+        return Inertia::render('Admin/Newsletter/Index', [
+            'subscribers' => $subscribers
+        ]);
+    }
+
+    public function newsletterDestroy(NewsletterSubscriber $subscriber)
+    {
+        $subscriber->delete();
+        return redirect()->back()->with('success', 'Subscriber removed successfully.');
     }
 }

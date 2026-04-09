@@ -51,7 +51,7 @@ export default function Index({ products, categories, filters }) {
                     </div>
                     <Link 
                         href={route('admin.products.create')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
                     >
                         <Plus size={18} /> New Product
                     </Link>
@@ -67,13 +67,13 @@ export default function Index({ products, categories, filters }) {
                                 placeholder="Search by name or SKU..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-12 pr-6 py-4 rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-12 pr-6 py-4 rounded-xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <select 
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="bg-slate-50 border-none px-6 py-4 rounded-xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all md:w-64"
+                            className="bg-slate-50 border-none px-6 py-4 rounded-xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all md:w-64"
                         >
                             <option value="">All Categories</option>
                             {categories.map(cat => (
@@ -116,7 +116,7 @@ export default function Index({ products, categories, filters }) {
                                             <div className="flex items-center gap-4">
                                                 <div className="w-14 h-14 bg-slate-100 rounded-2xl overflow-hidden shrink-0 border border-slate-50">
                                                     {product.thumbnail ? (
-                                                        <img src={product.thumbnail.startsWith('http') ? product.thumbnail : `/storage/${product.thumbnail.replace(/^\//, '')}`} className="w-full h-full object-cover" />
+                                                        <img src={product.thumbnail.startsWith('http') ? product.thumbnail : `/uploads/${product.thumbnail.replace(/^\//, '')}`} className="w-full h-full object-cover" />
                                                     ) : (
                                                         <div className="w-full h-full flex items-center justify-center text-slate-300">
                                                             <Package size={24} />
@@ -124,7 +124,7 @@ export default function Index({ products, categories, filters }) {
                                                     )}
                                                 </div>
                                                 <div>
-                                                    <p className="font-black text-slate-800 text-sm group-hover:text-blue-600 transition-colors">{product.name}</p>
+                                                    <p className="font-black text-slate-800 text-sm group-hover:text-emerald-600 transition-colors">{product.name}</p>
                                                     <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-0.5">SKU: {product.sku}</p>
                                                 </div>
                                             </div>
@@ -169,7 +169,7 @@ export default function Index({ products, categories, filters }) {
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <Link 
                                                     href={route('admin.products.edit', product.id)}
-                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                                 >
                                                     <Edit size={16} />
                                                 </Link>
@@ -202,7 +202,7 @@ export default function Index({ products, categories, filters }) {
                                     className={cn(
                                         "w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black transition-all",
                                         link.active 
-                                            ? "bg-blue-600 text-white shadow-lg shadow-blue-100" 
+                                            ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" 
                                             : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                         !link.url && "opacity-20 cursor-not-allowed"
                                     )}

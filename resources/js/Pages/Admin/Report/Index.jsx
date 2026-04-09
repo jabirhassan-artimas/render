@@ -85,14 +85,14 @@ export default function Index({ stats, locationStats, abandonedCarts, abandonedT
                         <div key={i} className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm relative overflow-hidden group hover:shadow-2xl transition-all">
                             <div className={cn(
                                 "absolute top-0 right-0 w-32 h-32 opacity-5 rounded-full -mr-16 -mt-16 transition-all group-hover:scale-125",
-                                card.color === 'blue' ? 'bg-blue-500' : 
+                                card.color === 'blue' ? 'bg-emerald-500' : 
                                 card.color === 'emerald' ? 'bg-emerald-500' :
                                 card.color === 'amber' ? 'bg-amber-500' : 'bg-rose-500'
                             )}></div>
                             <div className="relative">
                                 <div className={cn(
                                     "w-12 h-12 rounded-2xl flex items-center justify-center mb-8",
-                                    card.color === 'blue' ? 'bg-blue-50 text-blue-600' : 
+                                    card.color === 'blue' ? 'bg-emerald-50 text-emerald-600' : 
                                     card.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
                                     card.color === 'amber' ? 'bg-amber-50 text-amber-600' : 'bg-rose-50 text-rose-600'
                                 )}>
@@ -158,20 +158,20 @@ export default function Index({ stats, locationStats, abandonedCarts, abandonedT
                     <div className="lg:col-span-1 bg-white rounded-[3.5rem] p-10 border border-slate-100 shadow-sm">
                         <div className="flex justify-between items-center mb-10">
                             <h3 className="text-xl font-black text-slate-800 tracking-tight flex items-center gap-3">
-                                <Globe size={20} className="text-blue-600" /> Geospatial Data
+                                <Globe size={20} className="text-emerald-600" /> Geospatial Data
                             </h3>
-                            <Link href="#" className="text-[10px] font-black uppercase text-blue-600 tracking-widest bg-blue-50 px-3 py-1.5 rounded-full">Heatmap View</Link>
+                            <Link href="#" className="text-[10px] font-black uppercase text-emerald-600 tracking-widest bg-emerald-50 px-3 py-1.5 rounded-full">Heatmap View</Link>
                         </div>
                         <div className="space-y-6">
                             {(locationStats || []).map((loc, i) => (
                                 <div key={i} className="group cursor-help">
                                     <div className="flex justify-between items-end mb-2">
-                                        <p className="text-sm font-black text-slate-700 tracking-tight group-hover:text-blue-600 transition-colors">{loc.city || 'Digital World'}</p>
+                                        <p className="text-sm font-black text-slate-700 tracking-tight group-hover:text-emerald-600 transition-colors">{loc.city || 'Digital World'}</p>
                                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{loc.count} Users</p>
                                     </div>
                                     <div className="w-full h-3 bg-slate-50 rounded-full overflow-hidden border border-slate-100 shadow-inner">
                                         <div 
-                                            className="h-full bg-slate-900 rounded-full group-hover:bg-blue-600 transition-all duration-1000 ease-out" 
+                                            className="h-full bg-slate-900 rounded-full group-hover:bg-emerald-600 transition-all duration-1000 ease-out" 
                                             style={{ width: `${(loc.count / (locationStats[0]?.count || 1)) * 100}%` }}
                                         ></div>
                                     </div>
@@ -179,11 +179,11 @@ export default function Index({ stats, locationStats, abandonedCarts, abandonedT
                             ))}
                         </div>
                         <div className="mt-12 bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600/30 blur-3xl rounded-full -mr-12 -mt-12"></div>
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-600/30 blur-3xl rounded-full -mr-12 -mt-12"></div>
                             <div className="relative">
                                 <p className="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-1">Growth Prediction</p>
                                 <p className="text-xs font-medium text-slate-400 mb-4">Urban nodes showing 14% higher engagement than rural sectors.</p>
-                                <div className="flex items-center gap-2 text-blue-400 text-[10px] font-black uppercase tracking-widest">
+                                <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
                                     <TrendingUp size={14} /> Regional Expansion Suggested
                                 </div>
                             </div>
@@ -223,7 +223,7 @@ export default function Index({ stats, locationStats, abandonedCarts, abandonedT
                                                     <p className="text-sm font-black text-slate-900">৳{parseFloat(cart.total || 0).toLocaleString()}</p>
                                                     <p className="text-[10px] font-bold text-rose-400 uppercase tracking-widest">{cart.items_count} Fragments</p>
                                                 </div>
-                                                <button className="p-3 bg-white border border-slate-100 text-slate-300 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm opacity-0 group-hover:opacity-100">
+                                                <button className="p-3 bg-white border border-slate-100 text-slate-300 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm opacity-0 group-hover:opacity-100">
                                                     <RefreshCcw size={16} />
                                                 </button>
                                             </div>
@@ -317,7 +317,7 @@ export default function Index({ stats, locationStats, abandonedCarts, abandonedT
                             <X size={24} />
                         </button>
                         <h2 className="text-3xl font-black text-slate-800 tracking-tight mb-2 flex items-center gap-4">
-                            <Filter size={28} className="text-blue-600" /> Strategic Range
+                            <Filter size={28} className="text-emerald-600" /> Strategic Range
                         </h2>
                         <p className="text-slate-400 font-medium mb-10">Define the temporal window for intelligence extraction.</p>
                         
@@ -327,7 +327,7 @@ export default function Index({ stats, locationStats, abandonedCarts, abandonedT
                                     <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Egress Point</label>
                                     <input 
                                         type="date" 
-                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-blue-100"
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-emerald-100"
                                         value={dateRange.start_date}
                                         onChange={e => setDateRange({...dateRange, start_date: e.target.value})}
                                     />
@@ -336,7 +336,7 @@ export default function Index({ stats, locationStats, abandonedCarts, abandonedT
                                     <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Ingress Point</label>
                                     <input 
                                         type="date" 
-                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-blue-100"
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 text-sm font-bold focus:ring-2 focus:ring-emerald-100"
                                         value={dateRange.end_date}
                                         onChange={e => setDateRange({...dateRange, end_date: e.target.value})}
                                     />

@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import ProductCard from '@/Components/ProductCard';
-import { 
-    ShoppingBag, 
-    Star, 
-    Truck, 
-    ShieldCheck, 
-    RefreshCcw, 
+import {
+    ShoppingBag,
+    Star,
+    Truck,
+    ShieldCheck,
+    RefreshCcw,
     Headphones,
     Heart,
     Minus,
     Plus,
     CheckCircle2,
     ChevronRight,
-    MessageCircle
+    MessageCircle,
+    ArrowUpRight
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -28,7 +29,7 @@ export default function ProductDetail({ product, relatedProducts, auth }) {
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState('description');
 
-    const imageUrl = (path) => path ? (path.startsWith('http') ? path : `/storage/${path.replace(/^\//, '')}`) : 'https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&q=80&w=800';
+    const imageUrl = (path) => path ? (path.startsWith('http') ? path : `/uploads/${path.replace(/^\//, '')}`) : 'https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&q=80&w=800';
 
     const { post, processing } = useForm({
         quantity: 1
@@ -46,50 +47,50 @@ export default function ProductDetail({ product, relatedProducts, auth }) {
         <AppLayout>
             <Head title={product.name} />
 
-            <div className="container mx-auto px-4 md:px-6 py-12">
+            <div className="container mx-auto px-4 md:px-6 py-8">
                 {/* Breadcrumbs */}
-                <nav className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400 mb-12">
-                    <Link href="/">Home</Link>
-                    <ChevronRight size={12} />
-                    <Link href={route('shop')}>Shop</Link>
-                    <ChevronRight size={12} />
-                    <span className="text-blue-600">{product.name}</span>
+                <nav className="flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.2em] text-dark/30 mb-6 px-1">
+                    <Link href="/" className="hover:text-primary transition-colors">হোম</Link>
+                    <ChevronRight size={8} className="text-dark/10" />
+                    <Link href={route('shop')} className="hover:text-primary transition-colors">শপ</Link>
+                    <ChevronRight size={8} className="text-dark/10" />
+                    <span className="text-dark">{product.name}</span>
                 </nav>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 mb-32">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 mb-16">
                     {/* Left: Gallery */}
-                    <div className="space-y-6">
-                        <div className="aspect-square bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl shadow-blue-50 relative group">
-                            <img 
-                                src={imageUrl(mainImage)} 
-                                alt={product.name} 
-                                className="w-full h-full object-cover transition-all duration-700"
+                    <div className="space-y-3">
+                        <div className="aspect-square bg-white rounded-2xl overflow-hidden border border-dark/5 shadow-minimal relative group p-2">
+                            <img
+                                src={imageUrl(mainImage)}
+                                alt={product.name}
+                                className="w-full h-full object-cover transition-all duration-700 rounded-xl"
                             />
                             {product.discount > 0 && (
-                                <div className="absolute top-8 left-8 bg-rose-500 text-white px-6 py-2 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-rose-200">
-                                    -{product.discount}% Off
+                                <div className="absolute top-6 left-6 bg-dark text-primary px-5 py-2 rounded-xl font-black text-[9px] uppercase tracking-[0.2em] shadow-2xl">
+                                    -{product.discount}% ছাড়
                                 </div>
                             )}
                         </div>
-                        
+
                         {product.images?.length > 0 && (
-                            <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
-                                <button 
+                            <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+                                <button
                                     onClick={() => setMainImage(product.thumbnail)}
                                     className={cn(
-                                        "w-24 h-24 rounded-2xl overflow-hidden border-4 transition-all shrink-0",
-                                        mainImage === product.thumbnail ? "border-blue-600 shadow-lg scale-105" : "border-transparent opacity-60 hover:opacity-100"
+                                        "w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0",
+                                        mainImage === product.thumbnail ? "border-primary shadow-lg scale-105" : "border-transparent opacity-60 hover:opacity-100"
                                     )}
                                 >
                                     <img src={imageUrl(product.thumbnail)} className="w-full h-full object-cover" />
                                 </button>
                                 {product.images.map((img) => (
-                                    <button 
+                                    <button
                                         key={img.id}
                                         onClick={() => setMainImage(img.image_path)}
                                         className={cn(
-                                            "w-24 h-24 rounded-2xl overflow-hidden border-4 transition-all shrink-0",
-                                            mainImage === img.image_path ? "border-blue-600 shadow-lg scale-105" : "border-transparent opacity-60 hover:opacity-100"
+                                            "w-20 h-20 rounded-xl overflow-hidden border-2 transition-all shrink-0",
+                                            mainImage === img.image_path ? "border-primary shadow-lg scale-105" : "border-transparent opacity-60 hover:opacity-100"
                                         )}
                                     >
                                         <img src={imageUrl(img.image_path)} className="w-full h-full object-cover" />
@@ -101,187 +102,186 @@ export default function ProductDetail({ product, relatedProducts, auth }) {
 
                     {/* Right: Info */}
                     <div className="flex flex-col justify-center">
-                        <div className="flex items-center gap-4 mb-6">
-                            <span className="bg-blue-50 text-blue-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.2em]">
-                                {product.category?.name || 'Handpicked'}
+                        <div className="flex items-center gap-4 mb-4">
+                            <span className="bg-dark/5 text-primary px-4 py-1.5 rounded-lg text-[8px] font-black uppercase tracking-[0.2em]">
+                                {product.category?.name || 'বাছাইকৃত'}
                             </span>
-                            <div className="flex items-center gap-1 text-amber-500">
-                                <Star size={16} className="fill-current" />
-                                <Star size={16} className="fill-current" />
-                                <Star size={16} className="fill-current" />
-                                <Star size={16} className="fill-current" />
-                                <Star size={16} className="fill-current" />
-                                <span className="text-slate-400 text-xs font-bold ml-2">(128 Reviews)</span>
+                            <div className="flex items-center gap-1 text-primary">
+                                <Star size={12} className="fill-current" />
+                                <Star size={12} className="fill-current" />
+                                <Star size={12} className="fill-current" />
+                                <Star size={12} className="fill-current" />
+                                <Star size={12} className="fill-current" />
+                                <span className="text-dark/40 text-[9px] font-black ml-2 leading-none">({product.reviews_count || 128} REVIEW)</span>
                             </div>
                         </div>
 
-                        <h1 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tight leading-tight mb-6">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-dark tracking-tighter leading-tight mb-4">
                             {product.name}
                         </h1>
 
-                        <div className="flex items-baseline gap-4 mb-8">
-                            <span className="text-4xl font-black text-slate-900 tracking-tighter">
+                        <div className="flex items-baseline gap-3 mb-6">
+                            <span className="text-2xl md:text-3xl font-black text-dark tracking-tighter">
                                 ৳{parseFloat(product.price).toLocaleString()}
                             </span>
                             {product.old_price && (
-                                <span className="text-xl text-slate-300 font-bold line-through">
+                                <span className="text-base text-dark/20 font-black line-through">
                                     ৳{parseFloat(product.old_price).toLocaleString()}
                                 </span>
                             )}
                         </div>
 
-                        <p className="text-slate-500 text-lg font-medium leading-relaxed mb-10">
-                            {product.description || "Indulge in the epitome of craftsmanship. This premium piece is meticulously designed to offer both unparalleled style and enduring quality, becoming a timeless addition to your collection."}
+                        <p className="text-dark/60 text-sm md:text-base font-medium leading-relaxed mb-8 max-w-xl">
+                            {product.description || "Indulge in the epitome of craftsmanship."}
                         </p>
 
-                        <div className="space-y-10">
+                        <div className="space-y-6">
                             {/* Stock Status */}
                             <div className="flex items-center gap-2">
                                 <div className={cn(
                                     "w-3 h-3 rounded-full animate-pulse",
-                                    product.stock_qty > 0 ? "bg-emerald-500" : "bg-rose-500"
+                                    product.stock_qty > 0 ? "bg-primary" : "bg-dark/10"
                                 )}></div>
                                 <span className={cn(
-                                    "text-xs font-black uppercase tracking-widest",
-                                    product.stock_qty > 0 ? "text-emerald-600" : "text-rose-600"
+                                    "text-[9px] font-black uppercase tracking-[0.2em]",
+                                    product.stock_qty > 0 ? "text-dark" : "text-dark/20"
                                 )}>
-                                    {product.stock_qty > 0 ? `${product.stock_qty} Items In Stock` : 'Out of Stock'}
+                                    {product.stock_qty > 0 ? `${product.stock_qty}টি স্টকে আছে` : 'স্টক শেষ'}
                                 </span>
                             </div>
 
                             {/* Actions */}
-                            <form onSubmit={handleAddToCart} className="flex flex-wrap gap-4">
-                                <div className="bg-slate-100 p-1.5 rounded-2xl flex items-center gap-1">
-                                    <button 
+                            <form onSubmit={handleAddToCart} className="flex flex-wrap gap-4 pt-2">
+                                <div className="bg-heritage-paper p-1.5 rounded-xl flex items-center gap-1 border border-dark/5">
+                                    <button
                                         type="button"
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        className="w-12 h-12 flex items-center justify-center text-slate-500 hover:bg-white hover:text-blue-600 rounded-xl transition-all shadow-sm group active:scale-90"
+                                        className="w-10 h-10 flex items-center justify-center text-dark/40 hover:bg-dark hover:text-primary rounded-lg transition-all active:scale-95"
                                     >
-                                        <Minus size={18} />
+                                        <Minus size={16} />
                                     </button>
-                                    <input 
-                                        type="number" 
+                                    <input
+                                        type="number"
                                         value={quantity}
                                         onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                                        className="w-12 bg-transparent border-none text-center font-black text-slate-800 focus:ring-0 p-0"
+                                        className="w-10 bg-transparent border-none text-center font-black text-base text-dark focus:ring-0 p-0"
                                     />
-                                    <button 
+                                    <button
                                         type="button"
                                         onClick={() => setQuantity(Math.min(product.stock_qty || 99, quantity + 1))}
-                                        className="w-12 h-12 flex items-center justify-center text-slate-500 hover:bg-white hover:text-blue-600 rounded-xl transition-all shadow-sm group active:scale-90"
+                                        className="w-10 h-10 flex items-center justify-center text-dark/40 hover:bg-dark hover:text-primary rounded-lg transition-all active:scale-95"
                                     >
-                                        <Plus size={18} />
+                                        <Plus size={16} />
                                     </button>
                                 </div>
 
-                                <button 
-                                    className="flex-1 min-w-[200px] bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl shadow-blue-200 transition-all active:scale-95 flex items-center justify-center gap-3"
+                                <button
+                                    className="flex-1 min-w-[160px] bg-dark text-primary px-8 py-4 rounded-xl font-black text-[9px] uppercase tracking-[0.2em] shadow-lg hover:bg-primary hover:text-dark transition-all flex items-center justify-center gap-3 group"
                                     disabled={product.stock_qty <= 0 || processing}
                                 >
-                                    <ShoppingBag size={20} /> Add to Cart
+                                    <ShoppingBag size={16} /> ব্যাগে যোগ করুন
                                 </button>
 
-                                <button type="button" className="w-16 h-16 bg-white border border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 hover:text-rose-500 hover:border-rose-100 hover:bg-rose-50 transition-all group shadow-sm">
-                                    <Heart size={24} className="group-active:scale-125 transition-transform" />
+                                <button type="button" className="w-14 h-14 bg-heritage-paper border border-dark/5 rounded-xl flex items-center justify-center text-dark/40 hover:text-primary hover:bg-dark transition-all shadow-minimal">
+                                    <Heart size={20} />
                                 </button>
                             </form>
 
                             {/* Trust Badges */}
-                            <div className="grid grid-cols-2 gap-6 pt-10 border-t border-slate-100">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
-                                        <Truck size={18} />
+                            <div className="grid grid-cols-2 gap-4 pt-8 border-t border-dark/5">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-dark/5 rounded-xl flex items-center justify-center text-primary">
+                                        <Truck size={16} />
                                     </div>
-                                    <span className="text-xs font-bold text-slate-600">Global Delivery</span>
+                                    <span className="text-[8px] font-black uppercase tracking-widest text-dark/30 leading-tight">দেশব্যাপী <br />ডেলিভারি</span>
                                 </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
-                                        <ShieldCheck size={18} />
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-dark/5 rounded-xl flex items-center justify-center text-primary">
+                                        <ShieldCheck size={16} />
                                     </div>
-                                    <span className="text-xs font-bold text-slate-600">Secure Checkout</span>
+                                    <span className="text-[8px] font-black uppercase tracking-widest text-dark/30 leading-tight">নিরাপদ <br />পেমেন্ট</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Tabs Section */}
                 <div className="mb-32">
-                    <div className="flex gap-8 border-b border-slate-100 mb-12">
+                    <div className="flex gap-12 border-b border-dark/5 mb-16">
                         {['description', 'details', 'reviews'].map((tab) => (
-                            <button 
+                            <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
                                 className={cn(
-                                    "pb-6 text-sm font-black uppercase tracking-widest transition-all relative",
-                                    activeTab === tab 
-                                        ? "text-blue-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-blue-600 after:rounded-t-full" 
-                                        : "text-slate-400 hover:text-slate-600"
+                                    "pb-8 text-[10px] font-black uppercase tracking-[0.3em] transition-all relative",
+                                    activeTab === tab
+                                        ? "text-dark after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-primary after:rounded-t-full drop-shadow-sm"
+                                        : "text-dark/20 hover:text-dark/60"
                                 )}
                             >
-                                {tab}
+                                {tab === 'description' ? 'বিবরণ' : tab === 'details' ? 'বিস্তারিত' : 'রিভিউ'}
                             </button>
                         ))}
                     </div>
 
                     <div className="max-w-4xl animate-in fade-in duration-500">
                         {activeTab === 'description' && (
-                            <div className="prose prose-slate max-w-none text-slate-500 font-medium leading-loose text-lg">
+                            <div className="prose prose-dark max-w-4xl text-dark/60 font-black text-xl leading-[1.8] tracking-tight">
                                 <p>{product.long_description || product.description || "Our commitment to quality is evident in every stitch of this exquisite piece. Designed for those who demand excellence, it combines modern aesthetics with traditional manufacturing techniques to create something truly special."}</p>
                             </div>
                         )}
                         {activeTab === 'details' && (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="bg-white p-8 rounded-3xl border border-slate-50 shadow-sm">
-                                    <h4 className="font-black text-slate-800 text-sm uppercase tracking-widest mb-6">Specifications</h4>
-                                    <dl className="space-y-4">
-                                        <div className="flex justify-between border-b border-slate-50 pb-2">
-                                            <dt className="text-sm font-bold text-slate-400">Material</dt>
-                                            <dd className="text-sm font-black text-slate-800">Premium Grade</dd>
+                                <div className="bg-heritage-paper p-10 rounded-[2.5rem] border border-dark/5 shadow-minimal">
+                                    <h4 className="font-black text-dark text-[10px] uppercase tracking-[0.3em] mb-8">বৈশিষ্ট্যসমূহ</h4>
+                                    <dl className="space-y-6">
+                                        <div className="flex justify-between border-b border-dark/5 pb-3">
+                                            <dt className="text-xs font-black text-dark/30 uppercase tracking-widest">উপাদান</dt>
+                                            <dd className="text-sm font-black text-dark">প্রিমিয়াম গ্রেড</dd>
                                         </div>
-                                        <div className="flex justify-between border-b border-slate-50 pb-2">
-                                            <dt className="text-sm font-bold text-slate-400">Weight</dt>
-                                            <dd className="text-sm font-black text-slate-800">450g</dd>
+                                        <div className="flex justify-between border-b border-dark/5 pb-3">
+                                            <dt className="text-xs font-black text-dark/30 uppercase tracking-widest">ওজন</dt>
+                                            <dd className="text-sm font-black text-dark">৪৫০ গ্রাম</dd>
                                         </div>
-                                        <div className="flex justify-between border-b border-slate-50 pb-2">
-                                            <dt className="text-sm font-bold text-slate-400">Origin</dt>
-                                            <dd className="text-sm font-black text-slate-800">Imported</dd>
+                                        <div className="flex justify-between border-b border-dark/5 pb-3">
+                                            <dt className="text-xs font-black text-dark/30 uppercase tracking-widest">উৎস</dt>
+                                            <dd className="text-sm font-black text-dark">বাংলার ঐতিহ্য</dd>
                                         </div>
                                     </dl>
                                 </div>
                             </div>
                         )}
                         {activeTab === 'reviews' && (
-                            <div className="space-y-12">
+                            <div className="space-y-8">
                                 {product.reviews?.length > 0 ? (
                                     product.reviews.map((review) => (
-                                        <div key={review.id} className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col md:flex-row gap-8">
+                                        <div key={review.id} className="bg-white p-10 rounded-[2rem] border border-dark/5 shadow-minimal flex flex-col md:flex-row gap-8">
                                             <div className="shrink-0 flex flex-col items-center">
-                                                <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center font-black text-slate-400 text-xl">
+                                                <div className="w-20 h-20 bg-dark text-primary rounded-[1.5rem] flex items-center justify-center font-black text-2xl shadow-xl">
                                                     {review.user?.name.charAt(0)}
                                                 </div>
-                                                <div className="mt-4 flex flex-col items-center">
-                                                    <span className="text-xs font-black text-slate-800">{review.user?.name}</span>
-                                                    <span className="text-[10px] font-bold text-slate-400 mt-1 uppercase">Verified</span>
+                                                <div className="mt-6 flex flex-col items-center">
+                                                    <span className="text-sm font-black text-dark tracking-tight">{review.user?.name}</span>
+                                                    <span className="text-[10px] font-black text-primary mt-2 uppercase tracking-[0.2em] bg-dark px-3 py-1 rounded-full">ভেরিফাইড</span>
                                                 </div>
                                             </div>
                                             <div className="flex-1">
-                                                <div className="flex items-center gap-1 text-amber-500 mb-4">
+                                                <div className="flex items-center gap-1.5 text-primary mb-6">
                                                     {[...Array(5)].map((_, i) => (
-                                                        <Star key={i} size={14} className={i < review.rating ? "fill-current" : "text-slate-200"} />
+                                                        <Star key={i} size={16} className={i < review.rating ? "fill-current" : "text-dark/10"} />
                                                     ))}
                                                 </div>
-                                                <p className="text-slate-500 font-medium leading-relaxed">{review.comment}</p>
-                                                <div className="mt-6 text-[10px] font-black uppercase text-slate-300 tracking-widest">
+                                                <p className="text-dark/60 font-bold text-xl leading-relaxed mb-8 italic">"{review.comment}"</p>
+                                                <div className="text-[10px] font-black uppercase text-dark/20 tracking-[0.3em]">
                                                     {new Date(review.created_at).toLocaleDateString()}
                                                 </div>
                                             </div>
                                         </div>
                                     ))
                                 ) : (
-                                    <div className="text-center py-20 bg-slate-50 rounded-[3rem] border border-dashed border-slate-200">
-                                        <MessageCircle size={40} className="mx-auto text-slate-200 mb-4" />
-                                        <p className="text-slate-400 font-bold italic">No reviews yet. Be the first to share your experience!</p>
+                                    <div className="text-center py-24 bg-dark/5 rounded-[4rem] border border-dashed border-dark/10">
+                                        <MessageCircle size={56} className="mx-auto text-dark/10 mb-6" />
+                                        <p className="text-dark/30 font-black text-lg italic uppercase tracking-widest">এখনো কোনো রিভিউ নেই। প্রথম রিভিউটি আপনিই দিন!</p>
                                     </div>
                                 )}
                             </div>
@@ -291,13 +291,15 @@ export default function ProductDetail({ product, relatedProducts, auth }) {
 
                 {/* Related Products */}
                 {relatedProducts?.length > 0 && (
-                    <section>
-                        <div className="flex items-center justify-between mb-16">
-                            <h2 className="text-3xl md:text-5xl font-black text-slate-800 tracking-tight">You May Also Like</h2>
-                            <Link href={route('shop')} className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline">Explore More</Link>
+                    <section className="pt-16 border-t border-dark/5">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
+                            <h2 className="text-2xl md:text-3xl font-black text-dark tracking-tighter">আপনার আরও ভালো লাগতে পারে</h2>
+                            <Link href={route('shop')} className="text-dark hover:text-primary transition-colors font-black text-[9px] uppercase tracking-widest flex items-center gap-2 pb-1 border-b border-primary/20">
+                                কালেকশন দেখুন <ArrowUpRight size={14} />
+                            </Link>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {relatedProducts.map((p) => (
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+                            {relatedProducts.slice(0, 6).map((p) => (
                                 <ProductCard key={p.id} product={p} />
                             ))}
                         </div>

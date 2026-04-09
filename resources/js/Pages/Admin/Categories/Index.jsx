@@ -49,7 +49,7 @@ export default function Index({ categories, filters }) {
                     </div>
                     <Link 
                         href={route('admin.categories.create')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
                     >
                         <Plus size={18} /> New Category
                     </Link>
@@ -65,7 +65,7 @@ export default function Index({ categories, filters }) {
                                 placeholder="Search by category name..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <button type="submit" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg active:scale-95">
@@ -94,7 +94,7 @@ export default function Index({ categories, filters }) {
                                             <div className="flex items-center gap-4">
                                                 <div className="w-14 h-14 bg-slate-100 rounded-2xl overflow-hidden shrink-0 border border-slate-50">
                                                     {category.image ? (
-                                                        <img src={`/storage/${category.image}`} className="w-full h-full object-cover" />
+                                                        <img src={`/uploads/${category.image}`} className="w-full h-full object-cover" />
                                                     ) : (
                                                         <div className="w-full h-full flex items-center justify-center text-slate-300">
                                                             <Layers size={24} />
@@ -102,7 +102,7 @@ export default function Index({ categories, filters }) {
                                                     )}
                                                 </div>
                                                 <div>
-                                                    <p className="font-black text-slate-800 text-sm group-hover:text-blue-600 transition-colors uppercase tracking-tight">{category.name}</p>
+                                                    <p className="font-black text-slate-800 text-sm group-hover:text-emerald-600 transition-colors uppercase tracking-tight">{category.name}</p>
                                                     <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-0.5">Slug: {category.slug}</p>
                                                 </div>
                                             </div>
@@ -116,7 +116,7 @@ export default function Index({ categories, filters }) {
                                             <div className="flex justify-center">
                                                 <div className={cn(
                                                     "w-8 h-8 rounded-lg flex items-center justify-center border",
-                                                    category.parent_id ? "text-slate-400 border-slate-100" : "text-blue-600 border-blue-50 bg-blue-50/30"
+                                                    category.parent_id ? "text-slate-400 border-slate-100" : "text-emerald-600 border-emerald-50 bg-emerald-50/30"
                                                 )}>
                                                     {category.parent_id ? <ChevronRight size={14} className="rotate-90" /> : <FolderTree size={16} />}
                                                 </div>
@@ -141,7 +141,7 @@ export default function Index({ categories, filters }) {
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <Link 
                                                     href={route('admin.categories.edit', category.id)}
-                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                                 >
                                                     <Edit size={16} />
                                                 </Link>
@@ -174,7 +174,7 @@ export default function Index({ categories, filters }) {
                                     className={cn(
                                         "w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black transition-all",
                                         link.active 
-                                            ? "bg-blue-600 text-white shadow-lg shadow-blue-100" 
+                                            ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" 
                                             : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                         !link.url && "opacity-20 cursor-not-allowed"
                                     )}

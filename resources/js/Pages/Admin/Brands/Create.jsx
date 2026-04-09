@@ -24,7 +24,7 @@ export default function Create() {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.brands.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -45,7 +45,7 @@ export default function Create() {
                                 type="text"
                                 value={data.name}
                                 onChange={e => setData('name', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                 placeholder="e.g. Nike, Apple, Samsung"
                             />
                             {errors.name && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.name}</p>}
@@ -65,14 +65,14 @@ export default function Create() {
                                 />
                                 <label 
                                     htmlFor="brand-logo"
-                                    className="flex flex-col items-center justify-center w-full aspect-square bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group max-w-[240px] mx-auto"
+                                    className="flex flex-col items-center justify-center w-full aspect-square bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group max-w-[240px] mx-auto"
                                 >
                                     {data.image ? (
                                         <img src={URL.createObjectURL(data.image)} className="w-full h-full object-contain p-4" />
                                     ) : (
                                         <div className="text-center px-4">
                                             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm group-hover:scale-110 transition-transform">
-                                                <ImageIcon className="text-slate-300 group-hover:text-blue-500 transition-colors" size={20} />
+                                                <ImageIcon className="text-slate-300 group-hover:text-emerald-500 transition-colors" size={20} />
                                             </div>
                                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-tight text-center">Tap to upload brand mark</p>
                                         </div>
@@ -123,7 +123,7 @@ export default function Create() {
                         <button 
                             type="submit"
                             disabled={processing}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white px-10 py-4 rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
                         >
                             <Save size={18} /> {processing ? '...' : 'Save Brand'}
                         </button>

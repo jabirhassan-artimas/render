@@ -49,7 +49,7 @@ export default function Index({ services, filters }) {
                     </div>
                     <Link 
                         href={route('admin.services.create')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
                     >
                         <Plus size={18} /> Add Service
                     </Link>
@@ -65,7 +65,7 @@ export default function Index({ services, filters }) {
                                 placeholder="Search by service title..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <button type="submit" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg active:scale-95">
@@ -91,13 +91,13 @@ export default function Index({ services, filters }) {
                                 {services.data.map((service) => (
                                     <tr key={service.id} className="group hover:bg-slate-50/50 transition-colors">
                                         <td className="px-10 py-6">
-                                            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center border border-blue-100 group-hover:scale-110 transition-transform">
+                                            <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center border border-emerald-100 group-hover:scale-110 transition-transform">
                                                 <i className={cn(service.icon, "text-xl")}></i>
                                             </div>
                                         </td>
                                         <td className="px-10 py-6">
                                             <div>
-                                                <p className="font-black text-slate-800 text-sm group-hover:text-blue-600 transition-colors uppercase tracking-tight">{service.title}</p>
+                                                <p className="font-black text-slate-800 text-sm group-hover:text-emerald-600 transition-colors uppercase tracking-tight">{service.title}</p>
                                                 <p className="text-[10px] font-bold text-slate-400 mt-1 line-clamp-1">{service.description || 'No description provided.'}</p>
                                             </div>
                                         </td>
@@ -127,7 +127,7 @@ export default function Index({ services, filters }) {
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <Link 
                                                     href={route('admin.services.edit', service.id)}
-                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                                 >
                                                     <Edit size={16} />
                                                 </Link>
@@ -156,7 +156,7 @@ export default function Index({ services, filters }) {
                                     className={cn(
                                         "w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black transition-all",
                                         link.active 
-                                            ? "bg-blue-600 text-white shadow-lg shadow-blue-100" 
+                                            ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" 
                                             : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                         !link.url && "opacity-20 cursor-not-allowed"
                                     )}

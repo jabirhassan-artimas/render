@@ -50,7 +50,7 @@ export default function Index({ testimonials, filters }) {
                     </div>
                     <Link 
                         href={route('admin.testimonials.create')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
                     >
                         <Plus size={18} /> Add Review
                     </Link>
@@ -66,7 +66,7 @@ export default function Index({ testimonials, filters }) {
                                 placeholder="Search by reviewer name..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <button type="submit" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg active:scale-95">
@@ -78,14 +78,14 @@ export default function Index({ testimonials, filters }) {
                 {/* Grid Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     {testimonials.data.map((testimonial) => (
-                        <div key={testimonial.id} className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-blue-50 transition-all duration-500 group relative">
-                            <Quote className="absolute top-6 right-8 text-slate-50 opacity-50 transition-all group-hover:text-blue-50 group-hover:scale-150" size={80} />
+                        <div key={testimonial.id} className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-emerald-50 transition-all duration-500 group relative">
+                            <Quote className="absolute top-6 right-8 text-slate-50 opacity-50 transition-all group-hover:text-emerald-50 group-hover:scale-150" size={80} />
                             
                             <div className="relative z-10 flex flex-col h-full">
                                 <div className="flex items-center gap-4 mb-8">
                                     <div className="w-16 h-16 rounded-2xl bg-slate-100 overflow-hidden border border-slate-50">
                                         {testimonial.image ? (
-                                            <img src={`/storage/${testimonial.image}`} className="w-full h-full object-cover" />
+                                            <img src={`/uploads/${testimonial.image}`} className="w-full h-full object-cover" />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center font-black text-slate-300 text-xl italic uppercase">
                                                 {testimonial.name.charAt(0)}
@@ -112,7 +112,7 @@ export default function Index({ testimonials, filters }) {
                                     <div className="flex gap-2">
                                         <Link 
                                             href={route('admin.testimonials.edit', testimonial.id)}
-                                            className="p-3 bg-white border border-slate-100 text-slate-300 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                            className="p-3 bg-white border border-slate-100 text-slate-300 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                         >
                                             <Edit size={16} />
                                         </Link>
@@ -140,7 +140,7 @@ export default function Index({ testimonials, filters }) {
                                 className={cn(
                                     "w-12 h-12 rounded-2xl flex items-center justify-center text-xs font-black transition-all",
                                     link.active 
-                                        ? "bg-blue-600 text-white shadow-xl shadow-blue-100" 
+                                        ? "bg-emerald-600 text-white shadow-xl shadow-emerald-100" 
                                         : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                     !link.url && "opacity-20 cursor-not-allowed"
                                 )}

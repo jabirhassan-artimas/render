@@ -32,7 +32,7 @@ export default function Edit({ page }) {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.pages.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -54,7 +54,7 @@ export default function Edit({ page }) {
                                     type="text"
                                     value={data.title}
                                     onChange={e => setData('title', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                 />
                                 {errors.title && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.title}</p>}
                             </div>
@@ -66,7 +66,7 @@ export default function Edit({ page }) {
                                 <textarea 
                                     value={data.content}
                                     onChange={e => setData('content', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all min-h-[500px] font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all min-h-[500px] font-sans"
                                 ></textarea>
                                 {errors.content && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.content}</p>}
                             </div>
@@ -77,19 +77,19 @@ export default function Edit({ page }) {
                             <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
                                 <ImageIcon size={12} /> Header Appearance
                             </label>
-                            <label className="flex flex-col items-center justify-center w-full aspect-[21/9] bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group">
+                            <label className="flex flex-col items-center justify-center w-full aspect-[21/9] bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group">
                                 {data.image ? (
                                     <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" />
                                 ) : (
                                     <div className="relative w-full h-full">
                                         {page.image ? (
-                                            <img src={`/storage/${page.image}`} className="w-full h-full object-cover opacity-60 group-hover:opacity-30 transition-opacity" />
+                                            <img src={`/uploads/${page.image}`} className="w-full h-full object-cover opacity-60 group-hover:opacity-30 transition-opacity" />
                                         ) : (
                                             <div className="absolute inset-0 flex items-center justify-center text-slate-200"><ImageIcon size={48} /></div>
                                         )}
                                         <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-                                                <ImageIcon className="text-blue-500" size={24} />
+                                                <ImageIcon className="text-emerald-500" size={24} />
                                             </div>
                                             <p className="text-[10px] font-black text-white px-4 py-2 bg-slate-900/50 rounded-full mt-4 uppercase tracking-[0.2em]">Change Banner</p>
                                         </div>
@@ -131,7 +131,7 @@ export default function Edit({ page }) {
                                     type="text"
                                     value={data.meta.title}
                                     onChange={e => setData('meta', { ...data.meta, title: e.target.value })}
-                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                 />
                             </div>
 
@@ -140,7 +140,7 @@ export default function Edit({ page }) {
                                 <textarea 
                                     value={data.meta.description}
                                     onChange={e => setData('meta', { ...data.meta, description: e.target.value })}
-                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-blue-100 transition-all min-h-[120px] font-sans"
+                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-emerald-100 transition-all min-h-[120px] font-sans"
                                 ></textarea>
                             </div>
                         </div>

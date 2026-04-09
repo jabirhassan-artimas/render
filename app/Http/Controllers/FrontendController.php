@@ -8,9 +8,13 @@ use App\Models\Product;
 use App\Models\CmsPage;
 use App\Models\Banner;
 use App\Models\Brand;
+use App\Models\District;
 
 use App\Models\Service;
+use App\Models\Story;
 use App\Models\Testimonial;
+use App\Models\NewsletterSubscriber;
+use App\Models\CampaignItem;
 use Inertia\Inertia;
 
 class FrontendController extends Controller
@@ -26,6 +30,8 @@ class FrontendController extends Controller
 
         $services = Service::where('status', true)->orderBy('sort_order')->get();
         $testimonials = Testimonial::where('status', true)->latest()->get();
+        $districts = District::where('status', true)->withCount('products')->orderBy('sort_order')->take(8)->get();
+        $stories = Story::where('status', true)->orderBy('sort_order')->get();
 
         return Inertia::render('Home', [
             'sliderBanners' => $sliderBanners,
@@ -34,7 +40,10 @@ class FrontendController extends Controller
             'newArrivals' => $newArrivals,
             'categories' => $categories,
             'services' => $services,
-            'testimonials' => $testimonials
+            'testimonials' => $testimonials,
+            'districts' => $districts,
+            'stories' => $stories,
+            'campaignItems' => CampaignItem::where('status', true)->orderBy('sort_order')->get()
         ]);
     }
 
@@ -107,6 +116,17 @@ class FrontendController extends Controller
         ]);
     }
 
+    public function about()
+    {
+        $stories = Story::where('status', true)->orderBy('sort_order')->get();
+        $services = Service::where('status', true)->orderBy('sort_order')->get();
+        
+        return Inertia::render('About', [
+            'stories' => $stories,
+            'services' => $services
+        ]);
+    }
+
     public function cmsPage($slug)
     {
         $page = CmsPage::where('slug', $slug)->where('status', true)->firstOrFail();
@@ -146,5 +166,32 @@ class FrontendController extends Controller
             'brands' => Brand::where('status', true)->get(),
             'filters' => ['category' => $slug],
         ]);
+    }
+
+    public function districtProducts($id)
+    {
+        $district = District::findOrFail($id);
+        $products = Product::where('district_id', $district->id)->where('status', true)->latest()->paginate(12);
+
+        return Inertia::render('Shop', [
+            'products' => $products,
+            'categories' => Category::where('status', true)->whereNull('parent_id')->with('children')->get(),
+            'brands' => Brand::where('status', true)->get(),
+            'filters' => ['district' => $district->id],
+            'district' => $district
+        ]);
+    }
+
+    public function subscribeNewsletter(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:newsletter_subscribers,email'
+        ]);
+
+        NewsletterSubscriber::create([
+            'email' => $request->email
+        ]);
+
+        return redirect()->back()->with('success', 'You have successfully subscribed to our newsletter!');
     }
 }

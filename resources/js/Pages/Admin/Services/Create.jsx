@@ -25,7 +25,7 @@ export default function Create() {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.services.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -47,7 +47,7 @@ export default function Create() {
                                     type="text"
                                     value={data.name}
                                     onChange={e => setData('name', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                     placeholder="e.g. Worldwide Shipping"
                                 />
                                 {errors.name && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.name}</p>}
@@ -61,7 +61,7 @@ export default function Create() {
                                     type="text"
                                     value={data.icon}
                                     onChange={e => setData('icon', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                     placeholder="e.g. truck, shield, star"
                                 />
                             </div>
@@ -75,7 +75,7 @@ export default function Create() {
                             <textarea 
                                 value={data.description}
                                 onChange={e => setData('description', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all min-h-[120px] font-sans"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all min-h-[120px] font-sans"
                                 placeholder="What core value does this service provide?"
                             ></textarea>
                         </div>
@@ -120,7 +120,7 @@ export default function Create() {
                         <button 
                             type="submit"
                             disabled={processing}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
                         >
                             <Save size={18} /> {processing ? '...' : 'Save Service'}
                         </button>

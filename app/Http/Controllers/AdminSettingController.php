@@ -19,27 +19,30 @@ class AdminSettingController extends Controller
 
     public function update(Request $request)
     {
-        $data = $request->except(['_token', '_method', 'site_logo']);
+        $data = $request->except(['_token', '_method', 'site_logo', 'story_image', 'festival_image']);
 
         // Handle Text Inputs
         foreach ($data as $key => $value) {
             Setting::set($key, $value);
         }
 
-        // Handle Logo Upload
-        if ($request->hasFile('site_logo')) {
-            $request->validate([
-                'site_logo' => 'image|max:2048', // Max 2MB
-            ]);
+        // Handle Image Uploads
+        $images = ['site_logo', 'story_image', 'festival_image'];
+        foreach ($images as $img) {
+            if ($request->hasFile($img)) {
+                $request->validate([
+                    $img => 'image|max:2048',
+                ]);
 
-            // Delete old logo if exists
-            $oldLogo = Setting::get('site_logo');
-            if ($oldLogo && Storage::disk('public')->exists($oldLogo)) {
-                Storage::disk('public')->delete($oldLogo);
+                // Delete old image if exists
+                $oldImg = Setting::get($img);
+                if ($oldImg && Storage::disk('public')->exists($oldImg)) {
+                    Storage::disk('public')->delete($oldImg);
+                }
+
+                $path = $request->file($img)->store('settings', 'public');
+                Setting::set($img, $path);
             }
-
-            $path = $request->file('site_logo')->store('settings', 'public');
-            Setting::set('site_logo', $path);
         }
 
         return redirect()->back()->with('success', 'Settings updated successfully.');

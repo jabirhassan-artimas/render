@@ -22,11 +22,17 @@ class Product extends Model
         'thumbnail',
         'status',
         'featured',
+        'district_id',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
     }
 
     public function brand()

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, router } from '@inertiajs/react';
-import { 
-    Plus, 
-    Search, 
-    Edit, 
-    Trash2, 
+import {
+    Plus,
+    Search,
+    Edit,
+    Trash2,
     Image as ImageIcon,
     CheckCircle2,
     XCircle,
@@ -13,7 +13,9 @@ import {
     ChevronRight,
     ArrowUpDown,
     Filter,
-    ExternalLink
+    ExternalLink,
+    Video,
+    Youtube
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -47,9 +49,9 @@ export default function Index({ banners, filters }) {
                         <h1 className="text-3xl font-black text-slate-800 tracking-tight mb-2">Marketing Banners</h1>
                         <p className="text-slate-500 font-medium">Capture attention with high-impact sliders and promotions.</p>
                     </div>
-                    <Link 
+                    <Link
                         href={route('admin.banners.create')}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-200 transition-all flex items-center gap-3 active:scale-95 shrink-0"
                     >
                         <Plus size={18} /> Add Banner
                     </Link>
@@ -60,12 +62,12 @@ export default function Index({ banners, filters }) {
                     <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4 w-full">
                         <div className="flex-1 relative">
                             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-300" size={18} />
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 placeholder="Search banners by title..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <button type="submit" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg active:scale-95">
@@ -93,23 +95,34 @@ export default function Index({ banners, filters }) {
                                     <tr key={banner.id} className="group hover:bg-slate-50/50 transition-colors">
                                         <td className="px-10 py-6">
                                             <div className="w-32 aspect-video bg-slate-100 rounded-xl overflow-hidden border border-slate-100">
-                                                <img src={`/storage/${banner.image}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Banner" />
+                                                <img src={`/uploads/${banner.image}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Banner" />
                                             </div>
                                         </td>
                                         <td className="px-10 py-6">
                                             <div>
-                                                <p className="font-black text-slate-800 text-sm group-hover:text-blue-600 transition-colors">{banner.title}</p>
+                                                <p className="font-black text-slate-800 text-sm group-hover:text-emerald-600 transition-colors">{banner.title}</p>
                                                 {banner.link && (
-                                                    <a href={banner.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 flex items-center gap-1 hover:text-blue-500 mt-1">
+                                                    <a href={banner.link} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-slate-400 flex items-center gap-1 hover:text-emerald-500 mt-1">
                                                         <ExternalLink size={10} /> {banner.link}
                                                     </a>
                                                 )}
                                             </div>
                                         </td>
                                         <td className="px-10 py-6">
-                                            <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase tracking-widest rounded-lg">
-                                                {banner.type.replace('_', ' ')}
-                                            </span>
+                                            <div className="flex flex-col gap-1.5">
+                                                <span className="px-3 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase tracking-widest rounded-lg w-fit">
+                                                    {banner.type.replace('_', ' ')}
+                                                </span>
+                                                {banner.media_type && banner.media_type !== 'image' && (
+                                                    <span className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-lg flex items-center gap-1 w-fit ${banner.media_type === 'video_embed'
+                                                            ? 'bg-blue-50 text-blue-600'
+                                                            : 'bg-violet-50 text-violet-600'
+                                                        }`}>
+                                                        {banner.media_type === 'video_embed' ? <Youtube size={10} /> : <Video size={10} />}
+                                                        {banner.media_type === 'video_embed' ? 'Embed Video' : 'Uploaded Video'}
+                                                    </span>
+                                                )}
+                                            </div>
                                         </td>
                                         <td className="px-10 py-6 text-center font-black text-slate-800">
                                             {banner.sort_order}
@@ -131,13 +144,13 @@ export default function Index({ banners, filters }) {
                                         </td>
                                         <td className="px-10 py-6 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                <Link 
+                                                <Link
                                                     href={route('admin.banners.edit', banner.id)}
-                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                                 >
                                                     <Edit size={16} />
                                                 </Link>
-                                                <button 
+                                                <button
                                                     onClick={() => handleDelete(banner.id)}
                                                     className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-rose-500 hover:border-rose-100 rounded-xl transition-all shadow-sm"
                                                 >
@@ -156,17 +169,17 @@ export default function Index({ banners, filters }) {
                         <p className="text-xs font-bold text-slate-400">
                             Showing <span className="text-slate-800">{banners.from}</span> to <span className="text-slate-800">{banners.to}</span> of <span className="text-slate-800">{banners.total}</span> banners
                         </p>
-                        
+
                         <div className="flex gap-2">
-                             {banners.links.map((link, i) => (
+                            {banners.links.map((link, i) => (
                                 <button
                                     key={i}
                                     disabled={!link.url}
                                     onClick={() => link.url && router.get(link.url, { search }, { preserveState: true })}
                                     className={cn(
                                         "w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black transition-all",
-                                        link.active 
-                                            ? "bg-blue-600 text-white shadow-lg shadow-blue-100" 
+                                        link.active
+                                            ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100"
                                             : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                         !link.url && "opacity-20 cursor-not-allowed"
                                     )}

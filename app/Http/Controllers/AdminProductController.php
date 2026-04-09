@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\District;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -43,9 +44,11 @@ class AdminProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
+        $districts = District::where('status', true)->orderBy('sort_order')->get();
         return Inertia::render('Admin/Products/Create', [
             'categories' => $categories,
-            'brands' => $brands
+            'brands' => $brands,
+            'districts' => $districts
         ]);
     }
 
@@ -72,7 +75,8 @@ class AdminProductController extends Controller
 
         $product = Product::create([
             'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id, // Nullable
+            'brand_id' => $request->brand_id,
+            'district_id' => $request->district_id,
             'name' => $request->name,
             'slug' => $slug,
             'sku' => $request->sku ?? strtoupper(Str::random(8)),
@@ -102,11 +106,13 @@ class AdminProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
+        $districts = District::where('status', true)->orderBy('sort_order')->get();
         $product->load('images');
         return Inertia::render('Admin/Products/Edit', [
             'product' => $product,
             'categories' => $categories,
-            'brands' => $brands
+            'brands' => $brands,
+            'districts' => $districts
         ]);
     }
 
@@ -129,6 +135,7 @@ class AdminProductController extends Controller
         $product->update([
             'category_id' => $request->category_id,
             'brand_id' => $request->brand_id,
+            'district_id' => $request->district_id,
             'name' => $request->name,
             'sku' => $request->sku,
             'description' => $request->description,

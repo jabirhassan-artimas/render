@@ -86,7 +86,7 @@ export default function Index({ reviews }) {
                                     </div>
 
                                     <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 relative">
-                                        <MessageSquare size={16} className="absolute -top-2 -left-2 text-blue-100" />
+                                        <MessageSquare size={16} className="absolute -top-2 -left-2 text-emerald-100" />
                                         <p className="text-sm font-medium text-slate-700 leading-relaxed italic">
                                             "{review.comment}"
                                         </p>
@@ -98,7 +98,7 @@ export default function Index({ reviews }) {
                                         </div>
                                         <Link 
                                             href={route('admin.products.edit', review.product_id)}
-                                            className="flex items-center gap-2 text-[10px] font-black uppercase text-blue-500 tracking-widest hover:underline"
+                                            className="flex items-center gap-2 text-[10px] font-black uppercase text-emerald-500 tracking-widest hover:underline"
                                         >
                                             <Package size={12} /> {review.product?.name || 'Linked Product'}
                                         </Link>

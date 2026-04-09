@@ -13,7 +13,7 @@ export default function Invoice({ order }) {
             <div className="max-w-4xl mx-auto bg-white shadow-2xl rounded-[2rem] overflow-hidden border border-slate-100 print:shadow-none print:border-none print:rounded-none">
                 {/* Invoice Header */}
                 <div className="bg-slate-900 text-white p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] rounded-full -mr-32 -mt-32"></div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600/20 blur-[100px] rounded-full -mr-32 -mt-32"></div>
                     <div className="relative">
                         <h1 className="text-4xl font-black tracking-tighter mb-2">INVOICE</h1>
                         <p className="text-slate-400 font-bold uppercase tracking-[0.3em] text-[10px]">Tax Compliant Document</p>
@@ -106,7 +106,7 @@ export default function Invoice({ order }) {
                             <span className="text-xl font-black text-slate-800 tracking-tight">Net Amount</span>
                             <div className="text-right">
                                 <p className="text-3xl font-black text-slate-900 tracking-tighter">৳{parseFloat(order.total).toLocaleString()}</p>
-                                <p className="text-[10px] font-black uppercase text-blue-600 tracking-widest mt-1">Paid via {order.payment_method}</p>
+                                <p className="text-[10px] font-black uppercase text-emerald-600 tracking-widest mt-1">Paid via {order.payment_method}</p>
                             </div>
                         </div>
                     </div>

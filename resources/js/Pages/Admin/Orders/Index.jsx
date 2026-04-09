@@ -47,7 +47,7 @@ export default function Index({ orders, filters }) {
         switch(status?.toLowerCase()) {
             case 'delivered': return 'bg-emerald-50 text-emerald-600 border-emerald-100';
             case 'pending': return 'bg-amber-50 text-amber-600 border-amber-100';
-            case 'processing': return 'bg-blue-50 text-blue-600 border-blue-100';
+            case 'processing': return 'bg-emerald-50 text-emerald-600 border-emerald-100';
             case 'cancelled': return 'bg-rose-50 text-rose-600 border-rose-100';
             case 'returned': return 'bg-purple-50 text-purple-600 border-purple-100';
             default: return 'bg-slate-50 text-slate-400 border-slate-100';
@@ -56,7 +56,7 @@ export default function Index({ orders, filters }) {
 
     const getSourceIcon = (source) => {
         switch(source?.toLowerCase()) {
-            case 'web': return <Globe size={14} className="text-blue-500" />;
+            case 'web': return <Globe size={14} className="text-emerald-500" />;
             case 'mobile': return <Smartphone size={14} className="text-emerald-500" />;
             case 'manual': return <UserCircle size={14} className="text-amber-500" />;
             default: return <Globe size={14} className="text-slate-400" />;
@@ -120,7 +120,7 @@ export default function Index({ orders, filters }) {
                                 placeholder="Search by Order #, phone or email..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <button type="submit" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg active:scale-95">
@@ -177,8 +177,8 @@ export default function Index({ orders, filters }) {
                                         </td>
                                         <td className="px-10 py-6">
                                             {order.courier ? (
-                                                <div className="flex items-center gap-3 text-slate-600 bg-blue-50/50 py-2 px-3 rounded-lg border border-blue-100 inline-flex">
-                                                    <Truck size={14} className="text-blue-500" />
+                                                <div className="flex items-center gap-3 text-slate-600 bg-emerald-50/50 py-2 px-3 rounded-lg border border-emerald-100 inline-flex">
+                                                    <Truck size={14} className="text-emerald-500" />
                                                     <span className="text-[10px] font-black uppercase tracking-widest">{order.courier.name}</span>
                                                 </div>
                                             ) : (
@@ -207,7 +207,7 @@ export default function Index({ orders, filters }) {
                                         </td>
                                         <td className="px-10 py-6 text-right">
                                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                {order.order_notes && <MessageCircle size={16} className="text-blue-500 animate-pulse" title="Has Notes" />}
+                                                {order.order_notes && <MessageCircle size={16} className="text-emerald-500 animate-pulse" title="Has Notes" />}
                                                 <Link 
                                                     href={route('admin.orders.invoice', order.id)}
                                                     className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
@@ -218,7 +218,7 @@ export default function Index({ orders, filters }) {
                                                 </Link>
                                                 <Link 
                                                     href={route('admin.orders.show', order.id)}
-                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                                    className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                                     title="Order Details"
                                                 >
                                                     <Eye size={16} />

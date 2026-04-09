@@ -19,7 +19,7 @@ function cn(...inputs) {
 
 export default function Dashboard({ user, recentOrders, totalOrders, pendingOrders, completedOrders }) {
     const stats = [
-        { label: 'Total Orders', value: totalOrders, icon: Package, color: 'text-blue-600', bg: 'bg-blue-50' },
+        { label: 'Total Orders', value: totalOrders, icon: Package, color: 'text-emerald-600', bg: 'bg-emerald-50' },
         { label: 'Pending', value: pendingOrders, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
         { label: 'Completed', value: completedOrders, icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     ];
@@ -31,7 +31,7 @@ export default function Dashboard({ user, recentOrders, totalOrders, pendingOrde
             <div className="space-y-10">
                 {/* Welcome */}
                 <div className="bg-slate-900 p-12 rounded-[3.5rem] relative overflow-hidden shadow-2xl shadow-slate-200">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 opacity-20 blur-[80px] rounded-full -mr-32 -mt-32"></div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600 opacity-20 blur-[80px] rounded-full -mr-32 -mt-32"></div>
                     <div className="relative z-10">
                         <h1 className="text-4xl font-black text-white tracking-tight mb-2">Hello, {user.name} 👋</h1>
                         <p className="text-slate-400 font-medium">Welcome to your personal hub. Track your rewards and orders here.</p>
@@ -57,7 +57,7 @@ export default function Dashboard({ user, recentOrders, totalOrders, pendingOrde
                 <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
                     <div className="px-10 py-8 border-b border-slate-50 flex items-center justify-between">
                         <h3 className="text-xl font-black text-slate-800 tracking-tight">Recent Activity</h3>
-                        <Link href={route('customer.orders')} className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline flex items-center gap-2">
+                        <Link href={route('customer.orders')} className="text-emerald-600 font-black text-xs uppercase tracking-widest hover:underline flex items-center gap-2">
                             View All <ArrowRight size={14} />
                         </Link>
                     </div>
@@ -93,7 +93,7 @@ export default function Dashboard({ user, recentOrders, totalOrders, pendingOrde
                                             <td className="px-10 py-6 text-right">
                                                 <Link 
                                                     href={route('customer.orders.show', order.id)}
-                                                    className="inline-flex items-center justify-center w-10 h-10 bg-slate-100 rounded-xl text-slate-400 hover:bg-blue-600 hover:text-white transition-all group-active:scale-90"
+                                                    className="inline-flex items-center justify-center w-10 h-10 bg-slate-100 rounded-xl text-slate-400 hover:bg-emerald-600 hover:text-white transition-all group-active:scale-90"
                                                 >
                                                     <ArrowRight size={18} />
                                                 </Link>
@@ -113,14 +113,14 @@ export default function Dashboard({ user, recentOrders, totalOrders, pendingOrde
                 </div>
 
                 {/* Banner Promo */}
-                <div className="bg-gradient-to-tr from-indigo-600 to-blue-700 p-12 rounded-[3.5rem] relative overflow-hidden text-white flex flex-col md:flex-row items-center gap-10 shadow-3xl shadow-blue-100">
+                <div className="bg-gradient-to-tr from-emerald-600 to-emerald-700 p-12 rounded-[3.5rem] relative overflow-hidden text-white flex flex-col md:flex-row items-center gap-10 shadow-3xl shadow-emerald-100">
                     <div className="flex-1 space-y-6">
                         <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-md">
                             <TrendingUp size={24} />
                         </div>
                         <h2 className="text-3xl font-black tracking-tight leading-tight">Unlock Premium Status</h2>
-                        <p className="text-blue-100 font-medium opacity-80 max-w-sm">Complete 5 more orders to become a Gold Member and unlock 15% flat discount on all items.</p>
-                        <Link href={route('shop')} className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-slate-50 transition-all active:scale-95">
+                        <p className="text-emerald-100 font-medium opacity-80 max-w-sm">Complete 5 more orders to become a Gold Member and unlock 15% flat discount on all items.</p>
+                        <Link href={route('shop')} className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-slate-50 transition-all active:scale-95">
                             Shop Now
                         </Link>
                     </div>

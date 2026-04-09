@@ -47,7 +47,7 @@ export default function Profile({ user }) {
                     <div className="lg:col-span-8 space-y-10">
                         <section className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm space-y-8">
                             <div className="flex items-center gap-4 mb-2">
-                                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                                <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
                                     <User size={20} />
                                 </div>
                                 <h3 className="text-xl font-black text-slate-800 tracking-tight">Basic Credentials</h3>
@@ -62,7 +62,7 @@ export default function Profile({ user }) {
                                             type="text" 
                                             value={data.name}
                                             onChange={(e) => setData('name', e.target.value)}
-                                            className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                            className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                         />
                                     </div>
                                     {errors.name && <p className="text-rose-500 text-[10px] font-bold px-2">{errors.name}</p>}
@@ -89,7 +89,7 @@ export default function Profile({ user }) {
                                             type="tel" 
                                             value={data.phone}
                                             onChange={(e) => setData('phone', e.target.value)}
-                                            className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                            className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                         />
                                     </div>
                                     {errors.phone && <p className="text-rose-500 text-[10px] font-bold px-2">{errors.phone}</p>}
@@ -103,7 +103,7 @@ export default function Profile({ user }) {
                                             value={data.address}
                                             onChange={(e) => setData('address', e.target.value)}
                                             rows="3"
-                                            className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-3xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all resize-none"
+                                            className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-3xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all resize-none"
                                         />
                                     </div>
                                     {errors.address && <p className="text-rose-500 text-[10px] font-bold px-2">{errors.address}</p>}
@@ -113,7 +113,7 @@ export default function Profile({ user }) {
 
                         <section className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm space-y-8">
                             <div className="flex items-center gap-4 mb-2">
-                                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
+                                <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
                                     <Lock size={20} />
                                 </div>
                                 <h3 className="text-xl font-black text-slate-800 tracking-tight">Access Security</h3>
@@ -127,7 +127,7 @@ export default function Profile({ user }) {
                                         value={data.password}
                                         onChange={(e) => setData('password', e.target.value)}
                                         placeholder="••••••••"
-                                        className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                        className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                     />
                                     {errors.password && <p className="text-rose-500 text-[10px] font-bold px-2">{errors.password}</p>}
                                 </div>
@@ -138,7 +138,7 @@ export default function Profile({ user }) {
                                         value={data.password_confirmation}
                                         onChange={(e) => setData('password_confirmation', e.target.value)}
                                         placeholder="••••••••"
-                                        className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                        className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                     />
                                 </div>
                             </div>
@@ -153,7 +153,7 @@ export default function Profile({ user }) {
                             
                             <button 
                                 disabled={processing}
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-500/20 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50 group"
+                                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-500/20 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50 group"
                             >
                                 {processing ? (
                                     <Loader2 className="animate-spin" size={20} />

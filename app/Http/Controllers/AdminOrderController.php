@@ -59,11 +59,34 @@ class AdminOrderController extends Controller
             'cancellation_reason' => $request->cancellation_reason
         ]);
 
+        // Auto-send invoice ONLY on "confirmed"
+        if ($request->order_status === 'confirmed') {
+            \App\Jobs\SendInvoiceEmail::dispatch($order);
+        }
+
         if ($request->order_status == 'delivered') {
             $order->update(['payment_status' => 'paid']);
         }
 
         return redirect()->back()->with('success', 'Order status updated successfully.');
+    }
+
+    public function downloadInvoice(Order $order)
+    {
+        $order->load('items.product', 'user');
+        if (!$order->invoice_no) {
+            $order->update([
+                'invoice_no' => 'INV-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(4))
+            ]);
+        }
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.invoice', ['order' => $order]);
+        return $pdf->download("invoice-{$order->invoice_no}.pdf");
+    }
+
+    public function resendInvoice(Order $order)
+    {
+        \App\Jobs\SendInvoiceEmail::dispatch($order, true);
+        return redirect()->back()->with('success', 'Invoice email has been queued for resending.');
     }
 
     public function updateNotes(Request $request, Order $order)

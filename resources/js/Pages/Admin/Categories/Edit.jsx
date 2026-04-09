@@ -26,7 +26,7 @@ export default function Edit({ category, parents }) {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.categories.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -47,7 +47,7 @@ export default function Edit({ category, parents }) {
                                 type="text"
                                 value={data.name}
                                 onChange={e => setData('name', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                             {errors.name && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.name}</p>}
                         </div>
@@ -60,7 +60,7 @@ export default function Edit({ category, parents }) {
                             <select 
                                 value={data.parent_id || ''}
                                 onChange={e => setData('parent_id', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             >
                                 <option value="">Top Level Category</option>
                                 {parents.map(parent => (
@@ -83,20 +83,20 @@ export default function Edit({ category, parents }) {
                                 />
                                 <label 
                                     htmlFor="category-image-edit"
-                                    className="flex flex-col items-center justify-center w-full aspect-video md:aspect-[2/1] bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group"
+                                    className="flex flex-col items-center justify-center w-full aspect-video md:aspect-[2/1] bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group"
                                 >
                                     {data.image ? (
                                         <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="relative w-full h-full">
                                             {category.image ? (
-                                                <img src={`/storage/${category.image}`} className="w-full h-full object-cover opacity-60" />
+                                                <img src={`/uploads/${category.image}`} className="w-full h-full object-cover opacity-60" />
                                             ) : (
                                                 <div className="absolute inset-0 flex items-center justify-center text-slate-200"><ImageIcon size={48} /></div>
                                             )}
                                             <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-                                                    <ImageIcon className="text-blue-500" size={20} />
+                                                    <ImageIcon className="text-emerald-500" size={20} />
                                                 </div>
                                                 <p className="text-[10px] font-black text-white mt-3 uppercase tracking-widest drop-shadow-md">Choose new image</p>
                                             </div>

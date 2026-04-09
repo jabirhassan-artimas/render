@@ -25,7 +25,7 @@ export default function Create({ parents }) {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.categories.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -46,7 +46,7 @@ export default function Create({ parents }) {
                                 type="text"
                                 value={data.name}
                                 onChange={e => setData('name', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                 placeholder="e.g. Fashion & Apparel"
                             />
                             {errors.name && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.name}</p>}
@@ -60,7 +60,7 @@ export default function Create({ parents }) {
                             <select 
                                 value={data.parent_id}
                                 onChange={e => setData('parent_id', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             >
                                 <option value="">Top Level Category</option>
                                 {parents.map(parent => (
@@ -83,14 +83,14 @@ export default function Create({ parents }) {
                                 />
                                 <label 
                                     htmlFor="category-image"
-                                    className="flex flex-col items-center justify-center w-full aspect-video md:aspect-[2/1] bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group"
+                                    className="flex flex-col items-center justify-center w-full aspect-video md:aspect-[2/1] bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group"
                                 >
                                     {data.image ? (
                                         <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="text-center">
                                             <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                                                <ImageIcon className="text-slate-300 group-hover:text-blue-500 transition-colors" size={24} />
+                                                <ImageIcon className="text-slate-300 group-hover:text-emerald-500 transition-colors" size={24} />
                                             </div>
                                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Upload square thumbnail</p>
                                         </div>
@@ -140,7 +140,7 @@ export default function Create({ parents }) {
                         <button 
                             type="submit"
                             disabled={processing}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50"
                         >
                             <Save size={18} /> {processing ? 'Wait...' : 'Create Category'}
                         </button>

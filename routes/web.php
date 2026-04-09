@@ -18,10 +18,13 @@ use App\Http\Controllers\OrderController;
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/shop', [FrontendController::class, 'shop'])->name('shop');
 Route::get('/categories', [FrontendController::class, 'categories'])->name('categories');
+Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/page/{slug}', [FrontendController::class, 'cmsPage'])->name('page.show');
 Route::get('/product/{slug}', [FrontendController::class, 'product'])->name('product.details');
+Route::post('/newsletter/subscribe', [FrontendController::class, 'subscribeNewsletter'])->name('newsletter.subscribe');
 // Keep this last to avoid conflict with specific routes if slug is generic
 Route::get('/category/{slug}', [FrontendController::class, 'category'])->name('category');
+Route::get('/district/{id}/products', [FrontendController::class, 'districtProducts'])->name('district.products');
 
 // Cart Routes
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
@@ -47,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\CustomerController::class, 'dashboard'])->name('dashboard');
     Route::get('/my-orders', [\App\Http\Controllers\CustomerController::class, 'orders'])->name('customer.orders');
     Route::get('/my-orders/{order}', [\App\Http\Controllers\CustomerController::class, 'orderShow'])->name('customer.orders.show');
+    Route::get('/my-orders/{order}/invoice', [\App\Http\Controllers\CustomerController::class, 'downloadInvoice'])->name('orders.invoice.download.customer');
 
     Route::get('/profile', [\App\Http\Controllers\CustomerController::class, 'profile'])->name('customer.profile');
     Route::put('/profile', [\App\Http\Controllers\CustomerController::class, 'updateProfile'])->name('customer.profile.update');
@@ -73,6 +77,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('orders/{order}/assign-courier', [\App\Http\Controllers\AdminOrderController::class, 'assignCourier'])->name('orders.assignCourier');
     Route::post('orders/{order}/rate-delivery', [\App\Http\Controllers\AdminOrderController::class, 'rateDelivery'])->name('orders.rateDelivery');
     Route::get('orders/{order}/invoice', [\App\Http\Controllers\AdminOrderController::class, 'invoice'])->name('orders.invoice');
+    Route::get('orders/{order}/invoice/download', [\App\Http\Controllers\AdminOrderController::class, 'downloadInvoice'])->name('orders.invoice.download');
+    Route::post('orders/{order}/invoice/resend', [\App\Http\Controllers\AdminOrderController::class, 'resendInvoice'])->name('orders.invoice.resend');
 
     Route::get('customers', [\App\Http\Controllers\AdminCustomerController::class, 'index'])->name('customers.index');
     Route::post('customers/{user}/toggle-vip', [\App\Http\Controllers\AdminCustomerController::class, 'toggleVip'])->name('customers.toggleVip');
@@ -84,6 +90,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('brands', \App\Http\Controllers\AdminBrandController::class);
     Route::resource('coupons', \App\Http\Controllers\AdminCouponController::class);
     Route::resource('banners', App\Http\Controllers\AdminBannerController::class);
+    Route::resource('stories', \App\Http\Controllers\Admin\StoryController::class);
     Route::resource('cms-pages', App\Http\Controllers\AdminCmsPageController::class)->names('pages');
     Route::resource('services', App\Http\Controllers\AdminServiceController::class);
     Route::resource('testimonials', App\Http\Controllers\AdminTestimonialController::class);
@@ -94,6 +101,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Advanced Reporting
     Route::get('reports', [App\Http\Controllers\AdminReportController::class, 'index'])->name('reports.index');
+
+    Route::resource('districts', \App\Http\Controllers\AdminDistrictController::class);
+    Route::resource('campaign-items', \App\Http\Controllers\AdminCampaignItemController::class);
+    Route::get('newsletter', [App\Http\Controllers\AdminController::class, 'newsletter'])->name('newsletter.index');
+    Route::delete('newsletter/{subscriber}', [App\Http\Controllers\AdminController::class, 'newsletterDestroy'])->name('newsletter.destroy');
 
     Route::get('settings', [\App\Http\Controllers\AdminSettingController::class, 'index'])->name('settings.index');
     Route::put('settings', [\App\Http\Controllers\AdminSettingController::class, 'update'])->name('settings.update');

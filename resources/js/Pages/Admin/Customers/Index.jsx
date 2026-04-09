@@ -82,7 +82,7 @@ export default function Index({ customers, filters, locationStats }) {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
                         <div className="flex items-center gap-4 mb-2">
-                             <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                             <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
                                 <User size={20} />
                              </div>
                              <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">Total</span>
@@ -134,14 +134,14 @@ export default function Index({ customers, filters, locationStats }) {
                                 placeholder="Search by name, email, or phone..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none pl-14 pr-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
                         <div className="flex gap-4">
                             <select 
                                 value={vipFilter}
                                 onChange={(e) => setVipFilter(e.target.value)}
-                                className="bg-slate-50 border-none px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer pr-12"
+                                className="bg-slate-50 border-none px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest focus:ring-2 focus:ring-emerald-100 transition-all appearance-none cursor-pointer pr-12"
                                 style={{backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem center', backgroundSize: '1em'}}
                             >
                                 <option value="">All Types</option>
@@ -150,7 +150,7 @@ export default function Index({ customers, filters, locationStats }) {
                             <select 
                                 value={blockedFilter}
                                 onChange={(e) => setBlockedFilter(e.target.value)}
-                                className="bg-slate-50 border-none px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest focus:ring-2 focus:ring-blue-100 transition-all appearance-none cursor-pointer pr-12"
+                                className="bg-slate-50 border-none px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest focus:ring-2 focus:ring-emerald-100 transition-all appearance-none cursor-pointer pr-12"
                                 style={{backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem center', backgroundSize: '1em'}}
                             >
                                 <option value="">All Access</option>
@@ -168,7 +168,7 @@ export default function Index({ customers, filters, locationStats }) {
                     {customers.data.map((customer) => (
                         <div key={customer.id} className={cn(
                             "bg-white rounded-[2.5rem] p-8 border transition-all duration-500 group relative overflow-hidden",
-                            customer.is_blocked ? "border-red-100 bg-red-50/10 opacity-75" : "border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-blue-50"
+                            customer.is_blocked ? "border-red-100 bg-red-50/10 opacity-75" : "border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-emerald-50"
                         )}>
                             {customer.is_vip && (
                                 <div className="absolute top-0 right-0 p-6">
@@ -181,7 +181,7 @@ export default function Index({ customers, filters, locationStats }) {
                             <div className="flex items-start gap-6 mb-8">
                                 <div className={cn(
                                     "w-20 h-20 rounded-3xl flex items-center justify-center font-black text-2xl shadow-inner group-hover:scale-110 transition-transform duration-500",
-                                    customer.is_blocked ? "bg-red-100 text-red-600" : (customer.is_vip ? "bg-amber-50 text-amber-600" : "bg-blue-50 text-blue-600")
+                                    customer.is_blocked ? "bg-red-100 text-red-600" : (customer.is_vip ? "bg-amber-50 text-amber-600" : "bg-emerald-50 text-emerald-600")
                                 )}>
                                     {(customer.name || 'U').charAt(0).toUpperCase()}
                                 </div>
@@ -242,7 +242,7 @@ export default function Index({ customers, filters, locationStats }) {
                                         setSelectedCustomer(customer);
                                         setShowSmsModal(true);
                                     }}
-                                    className="p-3 bg-blue-50 text-blue-500 rounded-xl hover:bg-blue-100 transition-all tooltip"
+                                    className="p-3 bg-emerald-50 text-emerald-500 rounded-xl hover:bg-emerald-100 transition-all tooltip"
                                     title="Send SMS"
                                 >
                                     <MessageSquare size={18} />
@@ -275,7 +275,7 @@ export default function Index({ customers, filters, locationStats }) {
                             className={cn(
                                 "w-12 h-12 rounded-2xl flex items-center justify-center text-xs font-black transition-all",
                                 link.active 
-                                    ? "bg-blue-600 text-white shadow-xl shadow-blue-100" 
+                                    ? "bg-emerald-600 text-white shadow-xl shadow-emerald-100" 
                                     : "bg-white text-slate-400 border border-slate-100 hover:border-slate-300",
                                 !link.url && "opacity-20 cursor-not-allowed"
                             )}
@@ -305,7 +305,7 @@ export default function Index({ customers, filters, locationStats }) {
                             <div>
                                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 block">Message Content</label>
                                 <textarea 
-                                    className="w-full bg-slate-50 border-none rounded-3xl p-6 text-sm font-bold min-h-[150px] focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-slate-300"
+                                    className="w-full bg-slate-50 border-none rounded-3xl p-6 text-sm font-bold min-h-[150px] focus:ring-2 focus:ring-emerald-100 transition-all placeholder:text-slate-300"
                                     placeholder="Write your message here... avoid placeholders like [Name] as this is a direct transmission."
                                     value={smsMessage}
                                     onChange={(e) => setSmsMessage(e.target.value)}
@@ -322,7 +322,7 @@ export default function Index({ customers, filters, locationStats }) {
                                 </button>
                                 <button 
                                     type="submit"
-                                    className="flex-1 py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-100 transition-all active:scale-95"
+                                    className="flex-1 py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white bg-emerald-600 hover:bg-emerald-700 shadow-xl shadow-emerald-100 transition-all active:scale-95"
                                 >
                                     Send Transmission
                                 </button>

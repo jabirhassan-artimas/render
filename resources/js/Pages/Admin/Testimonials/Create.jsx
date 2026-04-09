@@ -26,7 +26,7 @@ export default function Create() {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.testimonials.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -48,7 +48,7 @@ export default function Create() {
                                     type="text"
                                     value={data.name}
                                     onChange={e => setData('name', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                     placeholder="e.g. Sarah Jenkins"
                                 />
                                 {errors.name && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.name}</p>}
@@ -62,7 +62,7 @@ export default function Create() {
                                     type="text"
                                     value={data.designation}
                                     onChange={e => setData('designation', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                     placeholder="e.g. CEO, Global Solutions"
                                 />
                             </div>
@@ -76,7 +76,7 @@ export default function Create() {
                             <textarea 
                                 value={data.content}
                                 onChange={e => setData('content', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all min-h-[150px] font-sans"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all min-h-[150px] font-sans"
                                 placeholder="What did the client say about your platform?"
                             ></textarea>
                             {errors.content && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.content}</p>}
@@ -88,11 +88,11 @@ export default function Create() {
                                 <ImageIcon size={12} /> Client Portrait
                             </label>
                             <div className="flex items-center gap-6">
-                                <label className="flex flex-col items-center justify-center w-24 h-24 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group shrink-0">
+                                <label className="flex flex-col items-center justify-center w-24 h-24 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group shrink-0">
                                     {data.image ? (
                                         <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" />
                                     ) : (
-                                        <ImageIcon className="text-slate-300 group-hover:text-blue-500 transition-colors" size={24} />
+                                        <ImageIcon className="text-slate-300 group-hover:text-emerald-500 transition-colors" size={24} />
                                     )}
                                     <input type="file" className="hidden" onChange={e => setData('image', e.target.files[0])} />
                                 </label>
@@ -143,7 +143,7 @@ export default function Create() {
                         <button 
                             type="submit"
                             disabled={processing}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
                         >
                             <Save size={18} /> {processing ? '...' : 'Deploy Voice'}
                         </button>

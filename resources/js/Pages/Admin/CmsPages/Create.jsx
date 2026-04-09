@@ -31,7 +31,7 @@ export default function Create() {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.pages.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -53,7 +53,7 @@ export default function Create() {
                                     type="text"
                                     value={data.title}
                                     onChange={e => setData('title', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                     placeholder="e.g. Terms & Conditions"
                                 />
                                 {errors.title && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.title}</p>}
@@ -66,7 +66,7 @@ export default function Create() {
                                 <textarea 
                                     value={data.content}
                                     onChange={e => setData('content', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all min-h-[400px] font-sans"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all min-h-[400px] font-sans"
                                     placeholder="Start writing your page content..."
                                 ></textarea>
                                 {errors.content && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.content}</p>}
@@ -78,7 +78,7 @@ export default function Create() {
                             <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
                                 <ImageIcon size={12} /> Header Banner (Optional)
                             </label>
-                            <label className="flex flex-col items-center justify-center w-full aspect-[21/9] bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group">
+                            <label className="flex flex-col items-center justify-center w-full aspect-[21/9] bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group">
                                 {data.image ? (
                                     <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" />
                                 ) : (
@@ -124,7 +124,7 @@ export default function Create() {
                                     type="text"
                                     value={data.meta.title}
                                     onChange={e => setData('meta', { ...data.meta, title: e.target.value })}
-                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-blue-100 transition-all font-sans"
+                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-sans"
                                 />
                             </div>
 
@@ -133,7 +133,7 @@ export default function Create() {
                                 <textarea 
                                     value={data.meta.description}
                                     onChange={e => setData('meta', { ...data.meta, description: e.target.value })}
-                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-blue-100 transition-all min-h-[100px] font-sans"
+                                    className="w-full bg-slate-50 border-none px-4 py-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-emerald-100 transition-all min-h-[100px] font-sans"
                                 ></textarea>
                             </div>
                         </div>
@@ -153,7 +153,7 @@ export default function Create() {
                             <button 
                                 type="submit"
                                 disabled={processing}
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-blue-100 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50"
+                                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-emerald-100 transition-all flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50"
                             >
                                 <Save size={18} /> {processing ? '...' : 'Deploy Page'}
                             </button>

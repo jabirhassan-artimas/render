@@ -103,7 +103,7 @@ export default function Index({ couriers = [] }) {
                         </div>
                     )}
                     {couriers.map((courier) => (
-                        <div key={courier.id} className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all group relative overflow-hidden">
+                        <div key={courier.id} className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm hover:shadow-2xl hover:border-emerald-100 transition-all group relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50/50 rounded-bl-[4rem] -mr-8 -mt-8 -z-0"></div>
                             
                             <div className="relative z-10">
@@ -117,7 +117,7 @@ export default function Index({ couriers = [] }) {
                                     <div className="flex gap-2">
                                         <button 
                                             onClick={() => openModal(courier)}
-                                            className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 hover:border-blue-100 rounded-xl transition-all shadow-sm"
+                                            className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 hover:border-emerald-100 rounded-xl transition-all shadow-sm"
                                         >
                                             <Edit2 size={14} />
                                         </button>
@@ -141,7 +141,7 @@ export default function Index({ couriers = [] }) {
 
                                     <div className="space-y-4">
                                         <div className="flex items-center gap-3 text-slate-500 font-bold text-sm">
-                                            <ShieldCheck size={16} className="text-blue-500" />
+                                            <ShieldCheck size={16} className="text-emerald-500" />
                                             <span>API Secure</span>
                                         </div>
                                         <div className="flex items-center gap-3 text-slate-500 font-bold text-sm">
@@ -176,7 +176,7 @@ export default function Index({ couriers = [] }) {
                                     <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Courier Name</label>
                                     <input 
                                         type="text"
-                                        className="w-full bg-slate-50 border-none rounded-2xl px-8 py-5 text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-8 py-5 text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                         placeholder="e.g. RedX, Pathao, FedEx..."
                                         value={data.name}
                                         onChange={e => setData('name', e.target.value)}
@@ -188,7 +188,7 @@ export default function Index({ couriers = [] }) {
                                     <div className="space-y-2">
                                         <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Integration Type</label>
                                         <select 
-                                            className="w-full bg-slate-50 border-none rounded-2xl px-8 py-5 text-sm font-bold focus:ring-2 focus:ring-blue-100 appearance-none"
+                                            className="w-full bg-slate-50 border-none rounded-2xl px-8 py-5 text-sm font-bold focus:ring-2 focus:ring-emerald-100 appearance-none"
                                             value={data.type}
                                             onChange={e => setData('type', e.target.value)}
                                         >
@@ -226,7 +226,7 @@ export default function Index({ couriers = [] }) {
                                     <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Secure API Key (Optional)</label>
                                     <input 
                                         type="password"
-                                        className="w-full bg-slate-50 border-none rounded-2xl px-8 py-5 text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-8 py-5 text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-mono"
                                         placeholder="************************"
                                         value={data.api_key}
                                         onChange={e => setData('api_key', e.target.value)}

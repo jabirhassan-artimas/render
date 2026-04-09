@@ -26,7 +26,7 @@ export default function Create() {
                 <div className="flex items-center gap-4">
                     <Link 
                         href={route('admin.coupons.index')}
-                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
                     >
                         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     </Link>
@@ -47,7 +47,7 @@ export default function Create() {
                                 type="text"
                                 value={data.code}
                                 onChange={e => setData('code', e.target.value.toUpperCase())}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-lg font-black tracking-[0.1em] focus:ring-2 focus:ring-blue-100 transition-all uppercase"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-lg font-black tracking-[0.1em] focus:ring-2 focus:ring-emerald-100 transition-all uppercase"
                                 placeholder="E.G. SAVE30"
                             />
                             {errors.code && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.code}</p>}
@@ -63,7 +63,7 @@ export default function Create() {
                                     type="number"
                                     value={data.discount_amount}
                                     onChange={e => setData('discount_amount', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-mono"
                                     placeholder="0.00"
                                 />
                                 {errors.discount_amount && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.discount_amount}</p>}
@@ -76,7 +76,7 @@ export default function Create() {
                                     type="number"
                                     value={data.discount_percentage}
                                     onChange={e => setData('discount_percentage', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all font-mono"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all font-mono"
                                     placeholder="1 - 100"
                                     max="100"
                                     min="1"
@@ -94,7 +94,7 @@ export default function Create() {
                                 type="date"
                                 value={data.expires_at}
                                 onChange={e => setData('expires_at', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                             />
                         </div>
 
@@ -138,7 +138,7 @@ export default function Create() {
                         <button 
                             type="submit"
                             disabled={processing}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-blue-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-100 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50 font-sans"
                         >
                             <Save size={18} /> {processing ? '...' : 'Deploy Coupon'}
                         </button>

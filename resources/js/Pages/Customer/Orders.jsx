@@ -34,7 +34,7 @@ export default function Orders({ orders }) {
                             <input 
                                 type="text" 
                                 placeholder="Order ID..."
-                                className="bg-white border border-slate-100 pl-12 pr-6 py-3 rounded-2xl text-xs font-bold focus:ring-2 focus:ring-blue-100 transition-all w-48 shadow-sm"
+                                className="bg-white border border-slate-100 pl-12 pr-6 py-3 rounded-2xl text-xs font-bold focus:ring-2 focus:ring-emerald-100 transition-all w-48 shadow-sm"
                             />
                         </div>
                     </div>
@@ -77,7 +77,7 @@ export default function Orders({ orders }) {
                                             <td className="px-10 py-6 text-right">
                                                 <Link 
                                                     href={route('customer.orders.show', order.id)}
-                                                    className="inline-flex items-center justify-center w-10 h-10 bg-white border border-slate-100 rounded-xl text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all group-active:scale-90 shadow-sm"
+                                                    className="inline-flex items-center justify-center w-10 h-10 bg-white border border-slate-100 rounded-xl text-slate-400 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all group-active:scale-90 shadow-sm"
                                                 >
                                                     <ChevronRight size={18} />
                                                 </Link>
@@ -92,7 +92,7 @@ export default function Orders({ orders }) {
                                                     <ShoppingBag size={40} />
                                                 </div>
                                                 <p className="text-slate-400 font-bold italic">No order history found for this account.</p>
-                                                <Link href={route('shop')} className="mt-8 text-blue-600 font-black text-xs uppercase tracking-widest hover:underline">Start Shopping Now</Link>
+                                                <Link href={route('shop')} className="mt-8 text-emerald-600 font-black text-xs uppercase tracking-widest hover:underline">Start Shopping Now</Link>
                                             </div>
                                         </td>
                                     </tr>

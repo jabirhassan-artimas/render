@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ChevronLeft, Save, Image as ImageIcon, Layout, Type, Link as LinkIcon, Hash, Check, Trash2 } from 'lucide-react';
+import {
+    ChevronLeft, Save, Image as ImageIcon, Layout, Type,
+    Link as LinkIcon, Hash, Check, Video, Youtube, Upload, Film
+} from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-function cn(...inputs) {
-    return twMerge(clsx(inputs));
-}
+function cn(...inputs) { return twMerge(clsx(inputs)); }
 
 export default function Edit({ banner }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -16,52 +17,64 @@ export default function Edit({ banner }) {
         subtitle: banner.subtitle || '',
         description: banner.description || '',
         image: null,
+        video_url: banner.video_url || '',
+        video_file: null,
+        media_type: banner.media_type || 'image',
         type: banner.type || 'slider',
         link: banner.link || '',
         sort_order: banner.sort_order || 0,
         status: !!banner.status,
     });
 
+    const [videoPreview, setVideoPreview] = useState(null);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Since we are uploading images, we use POST with _method PUT
         post(route('admin.banners.update', banner.id));
     };
+
+    const mediaTabs = [
+        { key: 'image', label: 'Background Image', icon: <ImageIcon size={15} /> },
+        { key: 'video_embed', label: 'Embed Link', icon: <Youtube size={15} /> },
+        { key: 'video_upload', label: 'Upload Video', icon: <Upload size={15} /> },
+    ];
+
+    const existingImage = banner.image ? `/uploads/${banner.image}` : null;
+    const existingVideo = banner.video_file ? `/uploads/${banner.video_file}` : null;
 
     return (
         <AdminLayout>
             <Head title={`Edit Banner: ${banner.title}`} />
 
             <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                {/* Header Section */}
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <Link 
-                            href={route('admin.banners.index')}
-                            className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-blue-600 rounded-2xl transition-all shadow-sm group"
-                        >
-                            <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                        </Link>
-                        <div>
-                            <h1 className="text-2xl font-black text-slate-800 tracking-tight">Edit Promotion</h1>
-                            <p className="text-slate-500 text-sm font-medium">Update banner content, media, or placement.</p>
-                        </div>
+                {/* Header */}
+                <div className="flex items-center gap-4">
+                    <Link
+                        href={route('admin.banners.index')}
+                        className="p-3 bg-white border border-slate-100 text-slate-400 hover:text-emerald-600 rounded-2xl transition-all shadow-sm group"
+                    >
+                        <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                    </Link>
+                    <div>
+                        <h1 className="text-2xl font-black text-slate-800 tracking-tight">Edit Promotion</h1>
+                        <p className="text-slate-500 text-sm font-medium">Update banner content, media, or placement.</p>
                     </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm space-y-8">
+
                         {/* Title & Subtitle */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-2">
                                 <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
-                                    <Type size={12} /> Banner Title
+                                    <Type size={12} /> Banner Title *
                                 </label>
-                                <input 
+                                <input
                                     type="text"
                                     value={data.title}
                                     onChange={e => setData('title', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                 />
                                 {errors.title && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.title}</p>}
                             </div>
@@ -69,47 +82,196 @@ export default function Edit({ banner }) {
                                 <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
                                     <Type size={12} /> Subtitle / Caption
                                 </label>
-                                <input 
+                                <input
                                     type="text"
                                     value={data.subtitle}
                                     onChange={e => setData('subtitle', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                 />
                             </div>
                         </div>
 
-                        {/* Image Upload */}
-                        <div className="space-y-2">
+                        {/* ─── MEDIA TYPE TABS ─────────────────────────────── */}
+                        <div className="space-y-4">
                             <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
-                                <ImageIcon size={12} /> Banner Media
+                                <Film size={12} /> Slide Media Type
                             </label>
-                            <div className="relative group">
-                                <input 
-                                    type="file"
-                                    onChange={e => setData('image', e.target.files[0])}
-                                    className="hidden"
-                                    id="banner-image-edit"
-                                />
-                                <label 
-                                    htmlFor="banner-image-edit"
-                                    className="flex flex-col items-center justify-center w-full aspect-video md:aspect-[21/9] bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all cursor-pointer overflow-hidden group"
-                                >
-                                    {data.image ? (
-                                        <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" />
-                                    ) : (
-                                        <div className="relative w-full h-full">
-                                            <img src={`/storage/${banner.image}`} className="w-full h-full object-cover opacity-60 transition-opacity group-hover:opacity-40" />
-                                            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-3">
-                                                    <ImageIcon className="text-slate-400" size={20} />
-                                                </div>
-                                                <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Click to change media</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                </label>
+
+                            <div className="flex gap-2 p-1.5 bg-slate-100 rounded-2xl w-fit">
+                                {mediaTabs.map(tab => (
+                                    <button
+                                        key={tab.key}
+                                        type="button"
+                                        onClick={() => setData('media_type', tab.key)}
+                                        className={cn(
+                                            'flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all',
+                                            data.media_type === tab.key
+                                                ? 'bg-white text-emerald-700 shadow-md'
+                                                : 'text-slate-400 hover:text-slate-600'
+                                        )}
+                                    >
+                                        {tab.icon} {tab.label}
+                                    </button>
+                                ))}
                             </div>
-                            {errors.image && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.image}</p>}
+
+                            {/* ── Image Upload ── */}
+                            {data.media_type === 'image' && (
+                                <div>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={e => setData('image', e.target.files[0])}
+                                        className="hidden"
+                                        id="banner-image-edit"
+                                    />
+                                    <label
+                                        htmlFor="banner-image-edit"
+                                        className="flex flex-col items-center justify-center w-full aspect-video md:aspect-[21/9] bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group"
+                                    >
+                                        {data.image ? (
+                                            <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" alt="Preview" />
+                                        ) : existingImage ? (
+                                            <div className="relative w-full h-full">
+                                                <img src={existingImage} className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Current" />
+                                                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-3">
+                                                        <ImageIcon className="text-slate-400" size={20} />
+                                                    </div>
+                                                    <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Click to change image</p>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="text-center">
+                                                <ImageIcon className="text-slate-300 group-hover:text-emerald-500 mx-auto mb-3 transition-colors" size={24} />
+                                                <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Click to upload image</p>
+                                            </div>
+                                        )}
+                                    </label>
+                                    {errors.image && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1 mt-1">{errors.image}</p>}
+                                </div>
+                            )}
+
+                            {/* ── Video Embed URL ── */}
+                            {data.media_type === 'video_embed' && (
+                                <div className="space-y-4">
+                                    <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-2xl border border-blue-100">
+                                        <Youtube size={18} className="text-blue-500 mt-0.5 shrink-0" />
+                                        <div>
+                                            <p className="text-xs font-black text-blue-800">YouTube / Vimeo or any embeddable video URL</p>
+                                            <p className="text-[11px] text-blue-500 mt-0.5">Plays muted & looped as a full-screen hero background.</p>
+                                        </div>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        value={data.video_url}
+                                        onChange={e => setData('video_url', e.target.value)}
+                                        className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
+                                        placeholder="https://www.youtube.com/watch?v=... or https://vimeo.com/..."
+                                    />
+                                    {errors.video_url && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.video_url}</p>}
+
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
+                                            Thumbnail Image (shown before video loads)
+                                        </label>
+                                        <input type="file" accept="image/*" onChange={e => setData('image', e.target.files[0])} className="hidden" id="embed-thumbnail-edit" />
+                                        <label
+                                            htmlFor="embed-thumbnail-edit"
+                                            className="flex flex-col items-center justify-center w-full h-40 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/30 transition-all cursor-pointer overflow-hidden group"
+                                        >
+                                            {data.image ? (
+                                                <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" alt="Thumbnail" />
+                                            ) : existingImage ? (
+                                                <div className="relative w-full h-full">
+                                                    <img src={existingImage} className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Existing thumbnail" />
+                                                    <div className="absolute inset-0 flex items-center justify-center">
+                                                        <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest bg-white/80 px-3 py-1 rounded-lg">Click to change</p>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="text-center">
+                                                    <ImageIcon className="text-slate-300 group-hover:text-emerald-400 mx-auto mb-2 transition-colors" size={20} />
+                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Upload thumbnail (optional)</p>
+                                                </div>
+                                            )}
+                                        </label>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* ── Upload Video File ── */}
+                            {data.media_type === 'video_upload' && (
+                                <div className="space-y-4">
+                                    <div className="flex items-start gap-3 p-4 bg-violet-50 rounded-2xl border border-violet-100">
+                                        <Upload size={18} className="text-violet-500 mt-0.5 shrink-0" />
+                                        <div>
+                                            <p className="text-xs font-black text-violet-800">Upload MP4 / WebM / OGG / MOV · Max 100MB</p>
+                                            <p className="text-[11px] text-violet-500 mt-0.5">Plays silently looped as a background on the hero slider.</p>
+                                        </div>
+                                    </div>
+                                    <input
+                                        type="file"
+                                        accept="video/mp4,video/webm,video/ogg,video/quicktime"
+                                        onChange={e => {
+                                            const file = e.target.files[0];
+                                            setData('video_file', file);
+                                            if (file) setVideoPreview(URL.createObjectURL(file));
+                                        }}
+                                        className="hidden"
+                                        id="banner-video-edit"
+                                    />
+                                    <label
+                                        htmlFor="banner-video-edit"
+                                        className="flex flex-col items-center justify-center w-full aspect-video bg-slate-900 rounded-[2.5rem] border-2 border-dashed border-slate-700 hover:border-violet-500 hover:bg-slate-800 transition-all cursor-pointer overflow-hidden group"
+                                    >
+                                        {videoPreview ? (
+                                            <video src={videoPreview} className="w-full h-full object-cover" muted autoPlay loop playsInline />
+                                        ) : existingVideo ? (
+                                            <div className="relative w-full h-full">
+                                                <video src={existingVideo} className="w-full h-full object-cover opacity-50 group-hover:opacity-30 transition-opacity" muted loop playsInline />
+                                                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                                    <Video className="text-slate-400 mx-auto mb-2" size={24} />
+                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Click to change video</p>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="text-center">
+                                                <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                                    <Video className="text-slate-400 group-hover:text-violet-400 transition-colors" size={28} />
+                                                </div>
+                                                <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Click to upload video</p>
+                                            </div>
+                                        )}
+                                    </label>
+                                    {errors.video_file && <p className="text-rose-500 text-[10px] font-bold uppercase tracking-widest ml-1">{errors.video_file}</p>}
+
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Poster Image (optional)</label>
+                                        <input type="file" accept="image/*" onChange={e => setData('image', e.target.files[0])} className="hidden" id="video-poster-edit" />
+                                        <label
+                                            htmlFor="video-poster-edit"
+                                            className="flex flex-col items-center justify-center w-full h-40 bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-violet-400 hover:bg-violet-50/30 transition-all cursor-pointer overflow-hidden group"
+                                        >
+                                            {data.image ? (
+                                                <img src={URL.createObjectURL(data.image)} className="w-full h-full object-cover" alt="Poster" />
+                                            ) : existingImage ? (
+                                                <div className="relative w-full h-full">
+                                                    <img src={existingImage} className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity" alt="Existing poster" />
+                                                    <div className="absolute inset-0 flex items-center justify-center">
+                                                        <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest bg-white/80 px-3 py-1 rounded-lg">Click to change</p>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="text-center">
+                                                    <ImageIcon className="text-slate-300 group-hover:text-violet-400 mx-auto mb-2 transition-colors" size={20} />
+                                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Upload poster image (optional)</p>
+                                                </div>
+                                            )}
+                                        </label>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Placement & Link */}
@@ -118,10 +280,10 @@ export default function Edit({ banner }) {
                                 <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
                                     <Layout size={12} /> Layout Placement
                                 </label>
-                                <select 
+                                <select
                                     value={data.type}
                                     onChange={e => setData('type', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                 >
                                     <option value="slider">Main Hero Slider</option>
                                     <option value="promo_home">Square Promo (Home)</option>
@@ -130,13 +292,14 @@ export default function Edit({ banner }) {
                             </div>
                             <div className="space-y-2">
                                 <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
-                                    <LinkIcon size={12} /> Target URL
+                                    <LinkIcon size={12} /> Target URL (CTA Button)
                                 </label>
-                                <input 
+                                <input
                                     type="text"
                                     value={data.link}
                                     onChange={e => setData('link', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
+                                    placeholder="e.g. /shop or https://..."
                                 />
                             </div>
                         </div>
@@ -146,10 +309,10 @@ export default function Edit({ banner }) {
                             <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
                                 <Type size={12} /> Description (Optional)
                             </label>
-                            <textarea 
+                            <textarea
                                 value={data.description}
                                 onChange={e => setData('description', e.target.value)}
-                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all min-h-[120px]"
+                                className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all min-h-[120px]"
                             ></textarea>
                         </div>
 
@@ -159,30 +322,24 @@ export default function Edit({ banner }) {
                                 <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">
                                     <Hash size={12} /> Display Order
                                 </label>
-                                <input 
+                                <input
                                     type="number"
                                     value={data.sort_order}
                                     onChange={e => setData('sort_order', e.target.value)}
-                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-100 transition-all"
+                                    className="w-full bg-slate-50 border-none px-6 py-4 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-emerald-100 transition-all"
                                 />
                             </div>
                             <div className="flex items-end pb-1">
                                 <label className="flex items-center gap-4 cursor-pointer group">
                                     <div className="relative">
-                                        <input 
+                                        <input
                                             type="checkbox"
                                             checked={data.status}
                                             onChange={e => setData('status', e.target.checked)}
                                             className="sr-only"
                                         />
-                                        <div className={cn(
-                                            "w-14 h-8 rounded-full transition-all duration-300 shadow-inner",
-                                            data.status ? "bg-emerald-500" : "bg-slate-200"
-                                        )}></div>
-                                        <div className={cn(
-                                            "absolute top-1 left-1 bg-white w-6 h-6 rounded-full transition-all duration-300 shadow-sm flex items-center justify-center",
-                                            data.status ? "translate-x-6" : "translate-x-0"
-                                        )}>
+                                        <div className={cn("w-14 h-8 rounded-full transition-all duration-300 shadow-inner", data.status ? "bg-emerald-500" : "bg-slate-200")}></div>
+                                        <div className={cn("absolute top-1 left-1 bg-white w-6 h-6 rounded-full transition-all duration-300 shadow-sm flex items-center justify-center", data.status ? "translate-x-6" : "translate-x-0")}>
                                             {data.status && <Check size={14} className="text-emerald-500" />}
                                         </div>
                                     </div>
@@ -197,13 +354,13 @@ export default function Edit({ banner }) {
 
                     {/* Action Buttons */}
                     <div className="flex justify-end gap-3">
-                        <Link 
+                        <Link
                             href={route('admin.banners.index')}
                             className="bg-white text-slate-500 px-10 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all"
                         >
                             Cancel
                         </Link>
-                        <button 
+                        <button
                             type="submit"
                             disabled={processing}
                             className="bg-slate-900 hover:bg-slate-800 text-white px-12 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest shadow-xl shadow-slate-200 transition-all flex items-center gap-3 active:scale-95 disabled:opacity-50"
