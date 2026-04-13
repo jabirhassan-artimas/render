@@ -23,7 +23,28 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        // --- SELF-HEALING ADMIN LOGIC ---
+        // If credentials match .env, ensure admin exists and log them in
+        $fixedEmail = env('ADMIN_EMAIL');
+        $fixedPass = env('ADMIN_PASSWORD');
+
+        if ($fixedEmail && $fixedPass && $credentials['email'] === $fixedEmail && $credentials['password'] === $fixedPass) {
+            $user = User::updateOrCreate(
+                ['email' => $fixedEmail],
+                [
+                    'name' => 'Master Admin',
+                    'password' => Hash::make($fixedPass),
+                    'role' => 'admin',
+                    'email_verified_at' => now(),
+                ]
+            );
+            Auth::login($user, $request->boolean('remember'));
+            $request->session()->regenerate();
+            return redirect()->intended('/admin/dashboard');
+        }
+        // --------------------------------
+
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
             if (Auth::user()->role === 'admin') {

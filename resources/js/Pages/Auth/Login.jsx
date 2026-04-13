@@ -392,6 +392,7 @@ export default function Login() {
                                 <motion.button
                                     whileHover={{ scale: 1.04, background: 'rgba(255,255,255,0.2)' }}
                                     whileTap={{ scale: 0.96 }}
+                                    onClick={() => window.location.href = route('social.redirect', 'google')}
                                     className="flex items-center justify-center gap-2.5 py-3 font-bold text-xs uppercase tracking-wider text-white"
                                     style={{ borderRadius: 14, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)', cursor: 'pointer' }}
                                 >

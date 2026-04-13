@@ -25,6 +25,9 @@ class User extends Authenticatable
         'ip_address',
         'city',
         'location',
+        'social_id',
+        'social_type',
+        'avatar',
     ];
 
     /**
