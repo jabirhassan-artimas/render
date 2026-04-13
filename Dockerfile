@@ -11,21 +11,13 @@ FROM php:8.2-fpm-alpine
 RUN apk add --no-cache \
     nginx \
     bash \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    zip \
-    libzip-dev \
-    unzip \
-    icu-dev \
-    oniguruma-dev \
-    postgresql-dev \
-    mysql-client
+    mysql-client \
+    postgresql-client
 
-# Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install pdo_mysql pdo_pgsql bcmath zip intl opcache
+# Install PHP extensions using the faster installer
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions gd pdo_mysql pdo_pgsql bcmath zip intl opcache
 
 # Setup Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
