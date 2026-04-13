@@ -1,18 +1,24 @@
 #!/bin/bash
-
-# Exit immediately if a command exits with a non-zero status
 set -e
 
-# Cache configuration and routes for production
+# If APP_KEY is missing, try to generate it temporarily to avoid a crash
+if [ -z "$APP_KEY" ]; then
+    echo "WARNING: APP_KEY is missing. Generating a temporary one..."
+    php artisan key:generate --force
+fi
+
+# Run storage link
+php artisan storage:link --force || true
+
+# Optimization for production
+echo "Running optimization..."
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Run migrations (be careful in production, but often needed on first deploy)
-# php artisan migrate --force
-
-# Start PHP-FPM in the background
+# Start PHP-FPM
 php-fpm -D
 
-# Start Nginx in the foreground
+# Start Nginx
+echo "Starting Nginx..."
 nginx -g "daemon off;"
